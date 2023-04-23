@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>NWM</title>
+    {% endif %}
+
+    <!-- Own css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="glass">
+            <div class="top">
+                <!-- Logo -->
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.png')}}" alt="" />
+                    <h2>Weather <span class="primary">Web</span></h2>
+                </div>
+
+                <!-- Close icon  -->
+                <div class="close" id="close-btn">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+                </div>
+            </div>
+            
+            <!-- Menu  -->
+            <div class="sidebar-menu">
+                <a href="#">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>view-dashboard</title><path d="M13,3V9H21V3M13,21H21V11H13M3,21H11V15H3M3,13H11V3H3V13Z" /></svg>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="#">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>message-fast</title><path d="M3 7C2.4 7 2 7.4 2 8S2.4 9 3 9H5V7H3M2 11C1.4 11 1 11.4 1 12S1.4 13 2 13H5V11H2M1 15C.4 15 0 15.4 0 16C0 16.6 .4 17 1 17H5V15H1M20 5H9C7.9 5 7 5.9 7 7V21L11 17H20C21.1 17 22 16.1 22 15V7C22 5.9 21.1 5 20 5Z" /></svg>
+                    <h3>Chat</h3>
+                </a>
+                <a href="#">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>newspaper-variant</title><path d="M20 3H4C2.89 3 2 3.89 2 5V19C2 20.11 2.89 21 4 21H20C21.11 21 22 20.11 22 19V5C22 3.89 21.11 3 20 3M5 7H10V13H5V7M19 17H5V15H19V17M19 13H12V11H19V13M19 9H12V7H19V9Z" /></svg>
+                    <h3>Messages</h3>
+                    <span class="message-count">26</span>
+                </a>
+                <a href="#">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>clouds</title><path d="M19.19 12.07C19.69 11.54 20 10.82 20 10C20 8.3 18.7 6.84 17 6.84H14.2C14.2 4.17 12.03 2 9.36 2C7.31 2 5.56 3.28 4.85 5.08C2.72 5.14 1 6.89 1 9.04C1 11.22 2.78 13 4.96 13H8.1C8.04 13.33 8 13.66 8 14H7.5C5.57 14 4 15.57 4 17.5S5.57 21 7.5 21H18.5C21 21 23 19 23 16.5C23 14.26 21.34 12.41 19.19 12.07M18.5 19H7.5C6.67 19 6 18.33 6 17.5S6.67 16 7.5 16H10V14C10 12.07 11.57 10.5 13.5 10.5S17 12.07 17 14H18.5C19.88 14 21 15.12 21 16.5S19.88 19 18.5 19Z" /></svg>
+                    <h3>Weather</h3>
+                </a>
+                <a href="#">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>cog</title><path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" /></svg>
+                    <h3>Settings</h3>
+                </a>
+                <a href="#">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>devices</title><path d="M3 6H21V4H3C1.9 4 1 4.9 1 6V18C1 19.1 1.9 20 3 20H7V18H3V6M13 12H9V13.78C8.39 14.33 8 15.11 8 16C8 16.89 8.39 17.67 9 18.22V20H13V18.22C13.61 17.67 14 16.88 14 16S13.61 14.33 13 13.78V12M11 17.5C10.17 17.5 9.5 16.83 9.5 16S10.17 14.5 11 14.5 12.5 15.17 12.5 16 11.83 17.5 11 17.5M22 8H16C15.5 8 15 8.5 15 9V19C15 19.5 15.5 20 16 20H22C22.5 20 23 19.5 23 19V9C23 8.5 22.5 8 22 8M21 18H17V10H21V18Z" /></svg>
+                    <h3>Devices</h3>
+                </a>
+                <a href="#" class="join-us">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>forum</title><path d="M17,12V3A1,1 0 0,0 16,2H3A1,1 0 0,0 2,3V17L6,13H16A1,1 0 0,0 17,12M21,6H19V15H6V17A1,1 0 0,0 7,18H18L22,22V7A1,1 0 0,0 21,6Z" /></svg>
+                    <h3>Join our community</h3>
+                </a>
+                <a href="#">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>logout</title><path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z" /></svg>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            {% block content %}{% endblock content %}
+        </main>
+
+        <section class="right-panel">
+            <div class="top">
+                <button id="menu-btn">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>menu</title><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+                </button>
+                <div class="theme-toggler">
+                    <svg class="active" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>white-balance-sunny</title><path d="M3.55 19.09L4.96 20.5L6.76 18.71L5.34 17.29M12 6C8.69 6 6 8.69 6 12S8.69 18 12 18 18 15.31 18 12C18 8.68 15.31 6 12 6M20 13H23V11H20M17.24 18.71L19.04 20.5L20.45 19.09L18.66 17.29M20.45 5L19.04 3.6L17.24 5.39L18.66 6.81M13 1H11V4H13M6.76 5.39L4.96 3.6L3.55 5L5.34 6.81L6.76 5.39M1 13H4V11H1M13 20H11V23H13" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z"></path></svg>
+                </div>
+
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Daniel</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="{{ url_for('static', filename='images/profile-1.jpg') }}" alt="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-updates">
+                <h2>Recent Updates</h2>
+                <div class="updates glass">
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="{{ url_for('static', filename='images/profile-2.jpg') }}" alt="" />
+                        </div>
+                        <div class="message">
+                            <p><b>Mike Tyson</b> received his order of Night lion tech GPS drone.</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="{{ url_for('static', filename='images/profile-3.jpg') }}" alt="" />
+                        </div>
+                        <div class="message">
+                            <p><b>Mike Tyson</b> received his order of Night lion tech GPS drone.</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="{{ url_for('static', filename='images/profile-4.jpg') }}" alt="" />
+                        </div>
+                        <div class="message">
+                            <p><b>Mike Tyson</b> received his order of Night lion tech GPS drone.</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sales-analytics">
+                <h2>Be More Active</h2>
+                <div class="item online glass">
+                        <svg class="icon-max" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>file-document-plus</title><path d="M14 2H6C4.89 2 4 2.89 4 4V20C4 21.11 4.89 22 6 22H13.81C13.28 21.09 13 20.05 13 19C13 18.67 13.03 18.33 13.08 18H6V16H13.81C14.27 15.2 14.91 14.5 15.68 14H6V12H18V13.08C18.33 13.03 18.67 13 19 13S19.67 13.03 20 13.08V8L14 2M13 9V3.5L18.5 9H13M18 15V18H15V20H18V23H20V20H23V18H20V15H18Z" /></svg>
+                    <div class="right">
+                        <div class="info">
+                            <h3>ADD NEW POST</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item offline glass">
+                        <svg class="icon-max" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>message-plus</title><path d="M20,2A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H6L2,22V4C2,2.89 2.9,2 4,2H20M11,6V9H8V11H11V14H13V11H16V9H13V6H11Z" /></svg>
+                    <div class="right">
+                        <div class="info">
+                            <h3>ASK NEW QUESTION</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item customers glass">
+                        <svg class="icon-max" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>hammer-wrench</title><path d="M13.78 15.3L19.78 21.3L21.89 19.14L15.89 13.14L13.78 15.3M17.5 10.1C17.11 10.1 16.69 10.05 16.36 9.91L4.97 21.25L2.86 19.14L10.27 11.74L8.5 9.96L7.78 10.66L6.33 9.25V12.11L5.63 12.81L2.11 9.25L2.81 8.55H5.62L4.22 7.14L7.78 3.58C8.95 2.41 10.83 2.41 12 3.58L9.89 5.74L11.3 7.14L10.59 7.85L12.38 9.63L14.2 7.75C14.06 7.42 14 7 14 6.63C14 4.66 15.56 3.11 17.5 3.11C18.09 3.11 18.61 3.25 19.08 3.53L16.41 6.2L17.91 7.7L20.58 5.03C20.86 5.5 21 6 21 6.63C21 8.55 19.45 10.1 17.5 10.1Z" /></svg>
+                    <div class="right">
+                        <div class="info">
+                            <h3>WHAT TO IMPROVE</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="item add-product">
+                    <div>
+                        <span class="material-symbols-sharp">add</span>
+                        <h3>Add Product</h3>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Own js -->
+    <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+</body>
+</html>
