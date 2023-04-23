@@ -228,6 +228,43 @@ b {
     background: var(--color-item);
 }
 
+.alert {
+    display: flex;
+    min-width: 35%;
+    padding: 2rem 3rem;
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    border-radius: var(--border-radius-3);
+    border: 2px solid #0ebe83;
+    position: absolute;
+    top: 10%;
+    right: 2%;
+    z-index: 15;
+    opacity: 0.85;
+    color: #1a806d;
+    font-weight: 700;
+    font-size: 15px;
+    backdrop-filter: blur(2rem);
+    box-shadow: var(--box-shadow);
+    animation: hideAlert 500ms ease-in-out 5s forwards;
+}
+
+.alert svg {
+    margin-right: 1rem;
+}
+
+.alert svg path {
+    fill: #1a806d;
+}
+
+@keyframes hideAlert {
+    from {
+        right: 2%;
+    }
+    to {
+        right: -100%;
+    }
+}
+
 .join-us {
     width: 100%;
     border-radius: var(--border-radius-1);
