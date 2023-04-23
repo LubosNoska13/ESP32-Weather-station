@@ -1,10 +1,10 @@
 //! Toggle menu with hamburger 
-hamburger_menu = document.querySelector(".hamburger-menu");
-big_wrapper = document.querySelector(".welcome-page-wrapper");
+// hamburger_menu = document.querySelector(".hamburger-menu");
+// big_wrapper = document.querySelector(".welcome-page-wrapper");
 
-hamburger_menu.addEventListener("click", () => {
-    big_wrapper.classList.toggle("active");
-});
+// hamburger_menu.addEventListener("click", () => {
+//     big_wrapper.classList.toggle("active");
+// });
 
 //! Toggle menu with hamburger 
 const sideMenu = document.querySelector("aside");
@@ -13,7 +13,6 @@ const closeBtn = document.querySelector("#close-btn");
 
 menuBtn.addEventListener("click", () => {
     sideMenu.style.display = "block";
-    console.log("hello")
 })
 
 closeBtn.addEventListener("click", () => {

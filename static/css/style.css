@@ -1372,12 +1372,22 @@ article .article-head .heart {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: all 300ms ease;
 }
 
 .article-add svg path {
     fill: var(--color-primary);
+    transition: all 300ms ease;
 }
 
+.article-add:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.article-add:hover svg path {
+    fill: #fff;
+}
 
 
 /* ========= Heart ========== */

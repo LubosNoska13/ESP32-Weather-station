@@ -84,12 +84,30 @@ form.sign-in-form {
   position: relative;
 }
 
-.input-field i {
-  text-align: center;
-  line-height: 55px;
-  color: #acacac;
+.input-field svg {
+  /* text-align: center; */
+  width: 100%;
+  height: 100%;
+  
+  /* line-height: 55px; */
+  /* color: #acacac; */
   transition: 0.5s;
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
+}
+
+.input-field.user svg{
+  scale: 0.5;
+} 
+.input-field.email svg {
+  scale: 0.4;
+}
+.input-field.password svg {
+  scale: 0.44;
+}
+
+
+.input-field svg path {
+  fill: #acacac;
 }
 
 .input-field input {
@@ -133,8 +151,11 @@ form.sign-in-form {
 }
 
 .social-icon:hover {
-  color: #4481eb;
   border-color: #4481eb;
+}
+
+.social-icon:hover svg path {
+  fill: #4481eb;
 }
 
 .btn {
