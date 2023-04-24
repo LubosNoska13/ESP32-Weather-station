@@ -608,6 +608,111 @@ transition: 0.5s;
     }
   }
   
+/* Login page */
+/* Wave*/
+#forms-wave {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+#forms-wave:before {
+    content: "";
+    position: absolute;
+    height: 200%;
+    width: 220vh;
+    top: 0%;
+    right: 48%;
+    transform: translateY(-50%);
+    /* background-image: linear-gradient(to right top, #65dfc9, #6cdbeb); */
+    /* background: transparent; */
+    background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+    transition: 1.8s ease-in-out;
+    border-radius: 50%;
+    z-index: 3;
+} 
+
+/* Form */
+.form-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: 100vh;
+    width: 100%;
+}
+
+.form-container form,
+.form-container .form-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.form-container .form-panel {
+    /* z-index: 6; */
+    color: #fff;
+}
+#login-form .form-panel {
+    z-index: 6;
+}
+#register-form .form-panel {
+    z-index: 1;
+}
+
+.form-container .form-panel img {
+    width: 33rem;
+    margin-top: 12vh;
+}
+
+.form-container .form-panel h3 {
+    margin-bottom: 2rem;
+}
+
+.form-container .form-panel p {
+    margin-bottom: 2rem;
+    width: 80%;
+}
+
+.form-container .input-field {
+    max-width: 380px;
+    width: 100%;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    height: 55px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    position: relative;
+}
+
+.form-container .input-field i {
+    text-align: center;
+    line-height: 55px;
+    color: #acacac;
+    transition: 0.5s;
+    font-size: 1.1rem;
+}
+
+.form-container .input-field input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.form-container .input-field input::placeholder {
+    color: #aaa;
+    font-weight: 500;
+}
+
+
+
 
 /* SideBar */
 

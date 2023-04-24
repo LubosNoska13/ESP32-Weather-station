@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for
+from flask import Flask, render_template, flash, redirect, url_for, request
 import credentials
 from forms import RegistrationForm, LoginForm
 
@@ -13,21 +13,24 @@ def home():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    register_form = RegistrationForm()
     login_form = LoginForm()
     
     if login_form.validate_on_submit():
-        flash("You have been login successfully!")
-        print(login_form.email.data)
-        print(login_form.password.data)
+        flash("You have been login successfully!", "success")
         return redirect(url_for("dashboard"))
     
-    elif register_form.validate_on_submit():
-        flash("Register")
-        print(register_form.username.data)
-        print(register_form.email.data)
+    return render_template("login.html", title="Login", form=login_form)
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    register_form = RegistrationForm()
+    
+    if register_form.validate_on_submit():
+        flash("You have been registered successfully!", "success")
         return redirect(url_for("dashboard"))
-    return render_template("login.html", title="Login", login_form=login_form, register_form=register_form)
+    
+    return render_template("register.html", title="Register", form=register_form)
 
 
 @app.route("/dashboard")
