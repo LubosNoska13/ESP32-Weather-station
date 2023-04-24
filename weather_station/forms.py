@@ -14,4 +14,4 @@ class LoginForm(FlaskForm):
     email = EmailField("Email", validators=[DataRequired()], render_kw={"placeholder": "Email"})
     password = PasswordField("Password", validators=[DataRequired(), Length(min=6, max=20)], render_kw={"placeholder": "Password"})
     submit = SubmitField("Login")
-    
+

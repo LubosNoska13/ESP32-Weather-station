@@ -1,10 +1,8 @@
-from flask import Flask, render_template, flash, redirect, url_for, request
-import credentials
-from forms import RegistrationForm, LoginForm
+from flask import render_template, flash, redirect, url_for, request
+from weather_station import app
+from weather_station.forms import RegistrationForm, LoginForm
+from weather_station.models import Users, Posts
 
-app = Flask(__name__)
-app.config["DEBUG"] = True
-app.config["SECRET_KEY"] = credentials.SECRET_KEY
 
 @app.route("/")
 @app.route("/home")
@@ -40,8 +38,3 @@ def dashboard():
 @app.route("/posts")
 def posts():
     return render_template("posts.html", title="Posts")
-
-
-
-if __name__ == "__main__":
-    app.run()
