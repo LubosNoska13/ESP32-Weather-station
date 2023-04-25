@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="settings">
+        <div class="account glass">
+            <div class="profile">
+                <img src="{{ image_file }}" alt="" />
+                <h1>Hi, {{ current_user.username }}</h1>
+            </div>
+            
+            
+            <form method="POST" action="" class="contact-form long" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+
+                {% if form.username.errors %}
+                    <div class="input-wrap w-100">
+                        {{ form.username(class="contact-input") }}
+                        {{ form.username.label }}
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>account</title><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>
+                    </div>
+                    {% for error in form.username.errors %}
+                        <div class="invalid-feedback">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="input-wrap w-100">
+                        {{ form.username(class="contact-input") }}
+                        {{ form.username.label }}
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>account</title><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>
+                    </div>
+                {% endif %}
+
+                <!-- <div class="input-wrap">
+                    {{ form.email }}
+                    {{ form.username.email }}
+                    <input type="text" class="contact-input" autocomplete="off" name="Last Name" required />
+                    <label>Last Name</label>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>account</title><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" /></svg>
+                </div> -->
+                
+                {% if form.email.errors %}
+                    <div class="input-wrap w-100">
+                        {{ form.email(class="contact-input") }}
+                        {{ form.email.label }}
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>email</title><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+                    </div>
+                    {% for error in form.email.errors %}
+                        <div class="invalid-feedback">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="input-wrap w-100">
+                        {{ form.email(class="contact-input") }}
+                        {{ form.email.label }}
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>email</title><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+                    </div>
+                {% endif %}
+
+                <!-- <div class="input-wrap textarea w-100">
+                    <textarea name="Message" class="contact-input" cols="30" rows="10" autocomplete="off" required></textarea>
+                    <label>Message</label>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>message-badge</title><path d="M22 7V16C22 17.1 21.1 18 20 18H6L2 22V4C2 2.9 2.9 2 4 2H14.1C14 2.3 14 2.7 14 3C14 5.8 16.2 8 19 8C20.1 8 21.2 7.6 22 7M16 3C16 4.7 17.3 6 19 6S22 4.7 22 3 20.7 0 19 0 16 1.3 16 3Z" /></svg>
+                </div> -->
+
+                <div class="contact-buttons">
+
+                    <button class="btn upload">
+                        <span><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>attachment-plus</title><path d="M7.5 16.5H13.55C13.34 16.97 13.18 17.47 13.09 18H7.5C4.46 18 2 15.54 2 12.5S4.46 7 7.5 7H18C20.21 7 22 8.79 22 11C22 11.91 21.69 12.74 21.17 13.41C20.63 13.2 20.05 13.07 19.45 13.03C20.08 12.58 20.5 11.84 20.5 11C20.5 9.62 19.38 8.5 18 8.5H7.5C5.29 8.5 3.5 10.29 3.5 12.5S5.29 16.5 7.5 16.5M9.5 13.5C8.95 13.5 8.5 13.05 8.5 12.5S8.95 11.5 9.5 11.5H17V10H9.5C8.12 10 7 11.12 7 12.5S8.12 15 9.5 15H14.54C15.11 14.36 15.81 13.85 16.61 13.5H9.5M20 18V15H18V18H15V20H18V23H20V20H23V18H20Z" /></svg>Add attachment</span>
+                        <!-- <input type="file" name="attachment" id="" /> -->
+                        {{ form.image_file }}
+                    </button>
+                    {{ form.submit(class="btn") }}
+                    <!-- <input type="submit" name="Send message" class="btn" /> -->
+                </div>
+                {% if form.image_file.errors %}
+                    {% for error in form.image_file.errors %}
+                        <div class="invalid-feedback">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </form>
+        
+        </div>
+    </div>
+
+    <!-- <script src="{{ ur }}"></script> -->
+{% endblock content %}

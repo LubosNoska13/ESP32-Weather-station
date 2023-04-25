@@ -1,12 +1,4 @@
 //! Toggle menu with hamburger 
-// hamburger_menu = document.querySelector(".hamburger-menu");
-// big_wrapper = document.querySelector(".welcome-page-wrapper");
-
-// hamburger_menu.addEventListener("click", () => {
-//     big_wrapper.classList.toggle("active");
-// });
-
-//! Toggle menu with hamburger 
 const sideMenu = document.querySelector("aside");
 const menuBtn = document.querySelector("#menu-btn");
 const closeBtn = document.querySelector("#close-btn");
@@ -58,5 +50,26 @@ articles.forEach(article => {
         heart.classList.remove('unlike');
         heart.classList.add('like');
     }
+    });
+});
+
+
+//! Settings formular
+const inputs = document.querySelectorAll(".contact-input");
+
+inputs.forEach((ipt) => {
+    if (ipt.value != ""){
+        ipt.parentNode.classList.add("not-empty");
+    }
+
+    ipt.addEventListener("focus", () => {
+        ipt.parentNode.classList.add("focus");
+        ipt.parentNode.classList.add("not-empty");
+    });
+    ipt.addEventListener("blur", () => {
+        if (ipt.value == ""){
+            ipt.parentNode.classList.remove("not-empty");
+        }
+        ipt.parentNode.classList.remove("focus");
     });
 });

@@ -1,6 +1,9 @@
+import os
+import secrets
+from PIL import Image
 from flask import render_template, flash, redirect, url_for, request
 from weather_station import app, db, bcrypt
-from weather_station.forms import RegistrationForm, LoginForm
+from weather_station.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from weather_station.models import Users, Posts
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -76,6 +79,47 @@ def dashboard():
 @login_required
 def posts():
     return render_template("posts.html", title="Posts")
+
+
+def save_picture(form_picture):
+    ## Generate random name for picture
+    random_hex = secrets.token_hex(8)
+    _, f_extension = os.path.splitext(form_picture.filename)
+    picture_name = random_hex + f_extension
+    
+    picture_path = os.path.join(app.root_path, "static/images/profile_pics", picture_name)
+    
+    output_size = (125, 125)
+    image = Image.open(form_picture)
+    image.thumbnail(output_size)
+    
+    image.save(picture_path)
+    return picture_name
+
+
+@app.route("/settings", methods=["GET", "POST"])
+@login_required
+def settings():
+    update_form = UpdateAccountForm()
+    if update_form.validate_on_submit():
+        
+        if update_form.image_file.data:
+            image_file = save_picture(update_form.image_file.data)
+            current_user.image_file = image_file
+            
+        current_user.username = update_form.username.data
+        current_user.email = update_form.email.data
+        db.session.commit()
+        
+        flash("Your account has been updated!", "success")
+        return redirect(url_for("settings"))
+    
+    elif request.method == "GET":
+        update_form.username.data = current_user.username
+        update_form.email.data = current_user.email
+        
+    image_file = url_for("static", filename=f"images/profile_pics/{current_user.image_file}")
+    return render_template("settings.html", title="Settings", image_file=image_file, form=update_form)
 
 
 @app.route("/logout")
