@@ -59,6 +59,75 @@ input {
       background-color: #fff;
       color: #7d8da1;
   }  
+
+.icon {
+    width: 23px;
+    height: 23px;
+}
+
+.alert {
+    display: flex;
+    min-width: 35%;
+    padding: 2rem 3rem;
+    /* background: linear-gradient(to right top, #65dfc9, #6cdbeb); */
+    border-radius: 1.05rem;
+    /* border: 2px solid #0ebe83; */
+    position: absolute;
+    top: 10%;
+    right: 2%;
+    z-index: 15;
+    opacity: 0.85;
+    /* color: #1a806d; */
+    font-weight: 700;
+    font-size: 15px;
+    backdrop-filter: blur(2rem);
+    box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.3);
+    animation: hideAlert 500ms ease-in-out 5s forwards;
+}
+
+.alert {
+    background: #bcd8f9;
+    border: 2px solid #347bf6;
+    color: #347bf6;
+}
+
+.alert.success {
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    border: 2px solid #0ebe83;
+    color: #1a806d;
+}
+
+.alert.danger {
+    background: #e7acb1;
+    /* background: linear-gradient(135deg, #DD1A4C, #E84E80); */
+    border: 2px solid #bc1640;
+    color: #bc1640;
+}
+
+.alert svg {
+    margin-right: 1rem;
+}
+
+.alert svg path {
+    fill: #347bf6;
+}
+
+.alert.success svg path {
+    fill: #1a806d;
+}
+
+.alert.danger svg path {
+    fill: #bc1640;
+}
+
+@keyframes hideAlert {
+    from {
+        right: 2%;
+    }
+    to {
+        right: -100%;
+    }
+}
 /* Wave*/
 #forms-wave {
     width: 100%;
