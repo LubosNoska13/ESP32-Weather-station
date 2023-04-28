@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Post</h1>
+
+    <article class="article glass">
+        <div class="article-head">
+            <img src="{{ url_for('static', filename='images/profile_pics/' + post.author.image_file ) }}" alt="" />
+            <div class="article-metadata">
+                <a href="#"><b>{{ post.author.username }}</b></a> <br />
+                <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="heart" viewBox="0 0 24 24">
+                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+        </div>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content }}</p>
+        {% if post.author == current_user %}
+            <div class="multiple-buttons">
+                <a class="btn btn-primary" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                <button type="button" class="btn btn-danger open-button" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            </div>
+        {% endif %}
+    </article>
+
+    <!-- Model -->
+    <dialog id="modal">
+        <h2>Delete Post?</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste, vitae!</p>
+
+        <div class="multiple-buttons">
+            <button class="btn close-button">Cancel</button>
+            <form method="POST" action="{{ url_for('delete_post', post_id=post.id) }}">
+                <input class="btn btn-danger" type="submit" value="Delete" />
+            </form>
+        </div>
+    </dialog>
+
+
+{% endblock content %}

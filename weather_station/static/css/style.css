@@ -6,7 +6,8 @@
     /* --color-primary: #2fabdc; */
     --color-primary: #347bf6;
     --color-primary-hover:#5590f7;
-    --color-danger: #ff7782;
+    /* --color-danger: #ff7782; */
+    --color-danger: #e9636e;
     --color-success: #41f1b6;
     --color-warning: #ffbb55;
     --color-white: #fff;
@@ -61,6 +62,9 @@
     box-sizing: border-box;
 }
 
+body, html {
+    height: 100%;
+}
 
 /* Custome Scroll Bar */
 ::-webkit-scrollbar {
@@ -213,18 +217,71 @@ b {
 
 .btn {
     display: inline-block;
-    padding: 0.9rem 1.9rem;
+    padding: 1.1rem 2rem;
     color: #fff !important;
-    background-color: var(--color-primary);
     border-radius: 2rem;
     text-transform: capitalize;
+    border: none;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 0.9rem;
     transition: 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    transform: scale(1) !important;
+}
+
+.btn-danger {
+    background-color: #e75460;
+}
+
+.btn-danger:hover {
+    background-color: #eb727c;
+}
+
+.multiple-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.multiple-buttons .btn:nth-child(1){
+    margin-right: 1.5rem;
+}
+
+
+.item {
+    width: 100%;
+    padding: var(--card-padding);
+    border-radius: var(--border-radius-3);
+}   
+
+/* .btn {
+    display: inline-block;
+    padding: 1.1rem 2rem;
+    background-color: var(--color-primary);
+    color: #fff;
+    border-radius: 40px;
+    border: none;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
 .btn:hover {
     background-color: var(--color-primary-hover);
-    transform: scale(1) !important;
-}
+} */
+
 
 .glass {
     backdrop-filter: blur(2rem);
@@ -274,6 +331,48 @@ b {
     border-radius: var(--border-radius-1);
     height: 100%;
     background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+}
+
+
+#modal {
+    max-width: 80ch;
+    padding: var(--card-padding);
+    border-radius: var(--border-radius-3);
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 0;
+    background: #fff;
+    text-align: center;
+    animation: showModal 250ms ease 0.3s forwards;
+    /* display: none; */
+    visibility: hidden;
+}
+
+@keyframes showModal {
+    from {
+        top: 15%;
+        /* display: none; */
+        /* visibility: hidden; */
+    }
+    to {
+        visibility: visible;
+        top: 30%;
+    }
+}
+
+#modal::backdrop {
+    /* background: #EEEEEE;
+    opacity: 0.4; */
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#modal .modal-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 1rem 0;
 }
 
 /* Welcome page */
@@ -1852,7 +1951,7 @@ form .input-field {
     grid-column: span 2;
 }
 
-.btn {
+/* .btn {
     display: inline-block;
     padding: 1.1rem 2rem;
     background-color: var(--color-primary);
@@ -1868,7 +1967,7 @@ form .input-field {
 
 .btn:hover {
     background-color: var(--color-primary-hover);
-}
+} */
 
 .btn.upload {
     position: relative;

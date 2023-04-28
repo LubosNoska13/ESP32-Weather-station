@@ -13,7 +13,7 @@
 <body>
     
     <!-- === Wave === -->
-    <div id="forms-wave">
+    <div id="forms-wave" class="login">
         <!-- Flash messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -38,7 +38,7 @@
             {% endif %}
         {% endwith %}
         <!-- === Login Form === -->
-        <div class="form-container active" id="login-form">
+        <div class="form-container active">
 
             <!-- Panel -->
             <div class="form-panel">

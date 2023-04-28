@@ -8,7 +8,6 @@
                 <h1>Hi, {{ current_user.username }}</h1>
             </div>
             
-            
             <form method="POST" action="" class="contact-form long" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
 
@@ -71,7 +70,7 @@
                         <!-- <input type="file" name="attachment" id="" /> -->
                         {{ form.image_file }}
                     </button>
-                    {{ form.submit(class="btn") }}
+                    {{ form.submit(class="btn btn-primary") }}
                     <!-- <input type="submit" name="Send message" class="btn" /> -->
                 </div>
                 {% if form.image_file.errors %}

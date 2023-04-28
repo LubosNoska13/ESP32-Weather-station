@@ -258,8 +258,22 @@ input {
         top: -55%;
         right: -36%;
     }
-    .form-container {
+    #forms-wave.register:before {
+        top: -58%;
+        right: 144%;
+    } 
+    /* .form-container {
+        
+    } */
+    #forms-wave.login .form-container {
         grid-template-columns: repeat(1, 1fr);
+        align-items: baseline;
+        margin-top: 4vh;
+    }
+    #forms-wave.register .form-container {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column-reverse;
     }
     .form-container .form-panel {
         flex-direction: row;
@@ -278,4 +292,16 @@ input {
         top: -61%;
         right: -85%;
     }
+    #forms-wave.register:before {
+        top: -66%;
+        right: 217%;
+    } 
+
+    #forms-wave.register .form-container {
+        justify-content: space-around;
+    }
+    .title {
+        font-size: 2rem;
+    }
+    
 }

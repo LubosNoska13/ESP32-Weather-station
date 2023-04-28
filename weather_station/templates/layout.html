@@ -74,16 +74,28 @@
             <!-- Flash messages -->
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
-
                     {% for category, message in messages %}
-                        <div class="alert {category}">
-                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>check-circle</title><path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" /></svg>
-                            {{message}}
-                        </div>
+                        {% if category == 'success' %}
+                            <div class="alert {{category}}">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>check-circle</title><path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" /></svg>
+                                {{ message }}
+                            </div>
+                        {% elif category == 'danger' %}
+                            <div class="alert {{category}}">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>alert-circle</title><path d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg>
+                                {{ message }}
+                            </div>
+                        {% else %}
+                            <div class="alert">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>information-slab-circle</title><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22M11 7H13V9H11V7M14 17H10V15H11V13H10V11H13V15H14V17Z" /></svg>
+                                {{ message }}
+                            </div>
+                        {% endif %}
                     {% endfor %}
-
                 {% endif %}
             {% endwith %}
+
+            <!-- Container -->
             {% block content %}{% endblock content %}
         </main>
 
@@ -104,7 +116,7 @@
                     </div>
                     <div class="profile-photo">
                         <a href="{{ url_for('settings') }}">
-                            <img src="{{ url_for('static', filename='images/profile_pics/') }}{{ current_user.image_file }}" alt="" />
+                            <img src="{{ url_for('static', filename='images/profile_pics/' + current_user.image_file ) }}" alt="" />
                         </a>
                         
                     </div>
@@ -146,9 +158,10 @@
                 </div>
             </div>
 
-            <div class="sales-analytics">
-                <h2>Be More Active</h2>
-                <div class="item online glass">
+            <a href="{{ url_for('create_post') }}">
+                <div class="sales-analytics">
+                    <h2>Be More Active</h2>
+                    <div class="item online glass">
                         <svg class="icon-max" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>file-document-plus</title><path d="M14 2H6C4.89 2 4 2.89 4 4V20C4 21.11 4.89 22 6 22H13.81C13.28 21.09 13 20.05 13 19C13 18.67 13.03 18.33 13.08 18H6V16H13.81C14.27 15.2 14.91 14.5 15.68 14H6V12H18V13.08C18.33 13.03 18.67 13 19 13S19.67 13.03 20 13.08V8L14 2M13 9V3.5L18.5 9H13M18 15V18H15V20H18V23H20V20H23V18H20V15H18Z" /></svg>
                     <div class="right">
                         <div class="info">
@@ -157,6 +170,7 @@
                         </div>
                     </div>
                 </div>
+            </a>
 
                 <div class="item offline glass">
                         <svg class="icon-max" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>message-plus</title><path d="M20,2A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H6L2,22V4C2,2.89 2.9,2 4,2H20M11,6V9H8V11H11V14H13V11H16V9H13V6H11Z" /></svg>
