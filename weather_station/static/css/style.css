@@ -109,10 +109,10 @@ a {
     color: var(--color-dark)
 }
 
-img {
+/* img {
     display: block;
     width: 100%;
-}
+} */
 
 h1 {
     font-size: 1.2rem;
@@ -149,11 +149,26 @@ th, td {
     font-size: 0.87rem;
 }
 
-.profile-photo {
-    width: 2.7rem;
-    height: 2.7rem;
+.profile-photo-min, .profile-photo, .profile-photo-max {
     border-radius: 50%;
     overflow: hidden;
+    object-fit: cover;
+    object-position: center;
+}
+
+.profile-photo-min {
+    width: 2.7rem;
+    height: 2.7rem;
+}
+
+.profile-photo {
+    width: 4rem;
+    height: 4rem;
+}
+
+.profile-photo-max {
+    width: 6rem;
+    height: 6rem;
 }
 
 .text-muted {
@@ -1412,10 +1427,12 @@ main .recent-orders a {
     .container {
         width: 95%;
         grid-template-columns: 1fr;
+        margin-top: 10vh;
     }
 
     aside {
         position: fixed;
+        top: 0;
         left: -100%;
         background: var(--color-item);
         width: 18rem;
@@ -1826,15 +1843,6 @@ form .input-field {
     text-align: center;
 }
 
-.settings .account .profile img {
-    width: 6rem;
-    border-radius: 50%;
-    margin: 0 auto;
-    margin-bottom: 2rem;
-}
-
-
-
 /* .contact {
     
 } */
@@ -1867,7 +1875,7 @@ form .input-field {
     border: none;
     outline: none;
     /* background-color: hsla(var(--main-hue), 50%, 50%, 6.5%); */
-    background-color: var(--color-info-light);
+    background-color: var();
     padding: 1.5rem 1.35rem calc(0.75rem - 2px) 1.35rem;
     font-family: inherit;
     border-radius: 20px;

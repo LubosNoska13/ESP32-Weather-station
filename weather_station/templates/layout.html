@@ -114,12 +114,9 @@
                         <p>Hey, <b>{{ current_user.username }}</b></p>
                         <small class="text-muted">User</small>
                     </div>
-                    <div class="profile-photo">
                         <a href="{{ url_for('settings') }}">
-                            <img src="{{ url_for('static', filename='images/profile_pics/' + current_user.image_file ) }}" alt="" />
+                            <img class="profile-photo-min" src="{{ url_for('static', filename='images/profile_pics/' + current_user.image_file ) }}" alt="" />
                         </a>
-                        
-                    </div>
                 </div>
             </div>
 
@@ -127,9 +124,7 @@
                 <h2>Recent Updates</h2>
                 <div class="updates glass">
                     <div class="update">
-                        <div class="profile-photo">
-                            <img src="{{ url_for('static', filename='images/profile-2.jpg') }}" alt="" />
-                        </div>
+                        <img class="profile-photo-min" src="{{ url_for('static', filename='images/profile-2.jpg') }}" alt="" />
                         <div class="message">
                             <p><b>Mike Tyson</b> received his order of Night lion tech GPS drone.</p>
                             <small class="text-muted">2 Minutes Ago</small>
@@ -137,9 +132,7 @@
                     </div>
 
                     <div class="update">
-                        <div class="profile-photo">
-                            <img src="{{ url_for('static', filename='images/profile-3.jpg') }}" alt="" />
-                        </div>
+                        <img class="profile-photo-min" src="{{ url_for('static', filename='images/profile-3.jpg') }}" alt="" />
                         <div class="message">
                             <p><b>Mike Tyson</b> received his order of Night lion tech GPS drone.</p>
                             <small class="text-muted">2 Minutes Ago</small>
@@ -147,9 +140,7 @@
                     </div>
 
                     <div class="update">
-                        <div class="profile-photo">
-                            <img src="{{ url_for('static', filename='images/profile-4.jpg') }}" alt="" />
-                        </div>
+                        <img class="profile-photo-min" src="{{ url_for('static', filename='images/profile-4.jpg') }}" alt="" />
                         <div class="message">
                             <p><b>Mike Tyson</b> received his order of Night lion tech GPS drone.</p>
                             <small class="text-muted">2 Minutes Ago</small>

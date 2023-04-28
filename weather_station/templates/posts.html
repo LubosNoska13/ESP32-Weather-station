@@ -13,7 +13,7 @@
     {% for post in posts %}
         <article class="article glass">
             <div class="article-head">
-                <img src="{{ url_for('static', filename='images/profile_pics/' + post.author.image_file ) }}" alt="" />
+                <img class="profile-photo" src="{{ url_for('static', filename='images/profile_pics/' + post.author.image_file ) }}" alt="" />
                 <div class="article-metadata">
                     <a href="#"><b>{{ post.author.username }}</b></a> <br />
                     <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
