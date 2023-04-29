@@ -123,29 +123,15 @@
             <div class="recent-updates">
                 <h2>Recent Updates</h2>
                 <div class="updates glass">
-                    <div class="update">
-                        <img class="profile-photo-min" src="{{ url_for('static', filename='images/profile-2.jpg') }}" alt="" />
-                        <div class="message">
-                            <p><b>Mike Tyson</b> received his order of Night lion tech GPS drone.</p>
-                            <small class="text-muted">2 Minutes Ago</small>
+                    {% for post in r_posts %}
+                        <div class="update">
+                            <img class="profile-photo-min" src="{{ url_for('static', filename='images/profile_pics/' + post.author.image_file) }}" alt="" />
+                            <div class="message">
+                                <p><b>{{ post.author.username }}</b> shared his new post about: {{ post.title }}</p>
+                                <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="update">
-                        <img class="profile-photo-min" src="{{ url_for('static', filename='images/profile-3.jpg') }}" alt="" />
-                        <div class="message">
-                            <p><b>Mike Tyson</b> received his order of Night lion tech GPS drone.</p>
-                            <small class="text-muted">2 Minutes Ago</small>
-                        </div>
-                    </div>
-
-                    <div class="update">
-                        <img class="profile-photo-min" src="{{ url_for('static', filename='images/profile-4.jpg') }}" alt="" />
-                        <div class="message">
-                            <p><b>Mike Tyson</b> received his order of Night lion tech GPS drone.</p>
-                            <small class="text-muted">2 Minutes Ago</small>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 

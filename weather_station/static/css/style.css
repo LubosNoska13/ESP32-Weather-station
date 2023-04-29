@@ -348,6 +348,24 @@ b {
     background: linear-gradient(to right top, #65dfc9, #6cdbeb);
 }
 
+.page-numbers {
+    display: block;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.page-numbers > a {
+    display: inline-block;
+    width: 2rem;
+    line-height: 2rem;
+    color: var(--color-info-dark);
+    margin: 0 0.2rem; 
+}
+
+.page-numbers .current-page {
+    background: var(--color-item);
+    border-radius: 50%;
+}
 
 #modal {
     max-width: 80ch;

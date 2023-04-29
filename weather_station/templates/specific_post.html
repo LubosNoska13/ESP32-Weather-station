@@ -7,7 +7,7 @@
         <div class="article-head">
             <img src="{{ url_for('static', filename='images/profile_pics/' + post.author.image_file ) }}" alt="" />
             <div class="article-metadata">
-                <a href="#"><b>{{ post.author.username }}</b></a> <br />
+                <a href="{{ url_for('user_posts', username=post.author.username) }}"><b>{{ post.author.username }}</b></a> <br />
                 <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" class="heart" viewBox="0 0 24 24">

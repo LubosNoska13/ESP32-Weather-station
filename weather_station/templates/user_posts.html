@@ -1,14 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h1>Messages</h1>
-    <a href="{{ url_for('create_post') }}">
-        <article class="article article-add">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>
-            <h3>Add New Article</h3>
-        </article>
-    </a>
-
+    <h1>Posts by {{ user.username }} ({{ posts.total }})</h1>
 
     {% for post in posts.items %}
         <article class="article glass">
@@ -31,9 +24,9 @@
         {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
             {% if page_num %}
                 {% if posts.page == page_num %}
-                    <a class="current-page glass" href="{{ url_for('posts', page=page_num) }}">{{ page_num }}</a>
+                    <a class="current-page glass" href="{{ url_for('user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a>
                 {% else %}
-                    <a href="{{ url_for('posts', page=page_num) }}">{{ page_num }}</a>
+                    <a href="{{ url_for('user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a>
                 {% endif %}
             {% else %}
                 ...

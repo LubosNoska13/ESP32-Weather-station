@@ -8,6 +8,12 @@ from weather_station.models import Users, Posts
 from flask_login import login_user, current_user, logout_user, login_required
 
 
+@app.context_processor 
+def recent_posts():
+    r_posts = Posts.query.order_by(Posts.date_posted.desc()).limit(3)
+    return dict(r_posts=r_posts)
+
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -72,13 +78,17 @@ def register():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html", title="Dashboard")
+    return render_template("dashboard.html", title="Dashboard", posts=posts)
 
 
 @app.route("/posts")
 @login_required
 def posts():
-    posts = Posts.query.all()
+    ## Get page number in url
+    page = request.args.get("page", default=1, type=int)
+    
+    ## Show only 5 posts per page
+    posts = Posts.query.order_by(Posts.date_posted.desc()).paginate(per_page=4, page=page)
     return render_template("posts.html", title="Posts", posts=posts)
 
 @app.route("/posts/new", methods=["GET", "POST"])
@@ -140,6 +150,19 @@ def delete_post(post_id):
     
     flash("Your post has been deleted!", "success")
     return redirect(url_for("posts"))
+
+
+@app.route("/user/<string:username>")
+@login_required
+def user_posts(username):
+    ## Get page number in url
+    page = request.args.get("page", default=1, type=int)
+    
+    user = Users.query.filter_by(username=username).first_or_404()
+    
+    ## Show only 5 posts per page
+    posts = Posts.query.filter_by(author=user).order_by(Posts.date_posted.desc()).paginate(per_page=4, page=page)
+    return render_template("user_posts.html", title="User Posts", posts=posts, user=user)
 
 
 def save_picture(form_picture):
