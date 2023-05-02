@@ -288,7 +288,7 @@ input {
     .form-container .form-panel img {
         display: none;
     }
-    #forms-wave:before {
+    #forms-wave.login:before {
         top: -61%;
         right: -85%;
     }
@@ -304,4 +304,18 @@ input {
         font-size: 2rem;
     }
     
+}
+
+@media (max-width: 400px){
+    #forms-wave.login:before {
+        top: -56%;
+        right: -97%;
+    }
+    .form-container .input-field {
+        width: 90%;
+    }
+    #forms-wave.register:before {
+        top: -60%;
+        right: 219%;
+    } 
 }

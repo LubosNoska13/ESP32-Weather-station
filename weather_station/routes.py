@@ -1,8 +1,9 @@
 import os
 import secrets
+import json
 from PIL import Image
-from flask import render_template, flash, redirect, url_for, request, abort
-from weather_station import app, db, bcrypt
+from flask import render_template, flash, redirect, url_for, request, abort, jsonify
+from weather_station import app, db, bcrypt, mqtt
 from weather_station.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from weather_station.models import Users, Posts
 from flask_login import login_user, current_user, logout_user, login_required
@@ -212,3 +213,37 @@ def logout():
     ## Logout user
     logout_user()
     return redirect(url_for("home"))
+
+
+data_list = []
+
+@mqtt.on_message()
+def on_message(client, userdata, message):
+    global last_message
+    # Extract the subscription topic from the message
+    topic = message.topic
+    
+    if topic == "esp32/data":
+        # Process the received message
+        payload = message.payload.decode("utf-8")
+        data = json.loads(payload)
+        print(data.get("temperature"))
+        last_message = data
+        
+        # Only return the most recent 10 records
+        if len(data_list) > 7:
+            data_list.pop(0)
+        
+        # Append the received data to the data_list
+        data_list.append(data)
+        
+
+
+@app.route('/esp32/data')
+def data_esp32():
+    return jsonify(data_list)
+
+
+@app.route("/weather")
+def weather():
+    return render_template("weather.html")

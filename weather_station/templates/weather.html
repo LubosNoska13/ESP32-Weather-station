@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="chart glass">
+        <canvas id="humidityChart"></canvas>
+    </div>
+    <div class="chart glass">
+        <canvas id="temperatureChart"></canvas>
+    </div>
+    <div class="chart glass">
+        <canvas id="wifiChart"></canvas>
+    </div>
+{% endblock content %}
+
+{% block additional_imports %}
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% endblock additional_imports %}
