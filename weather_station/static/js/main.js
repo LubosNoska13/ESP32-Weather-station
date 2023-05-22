@@ -107,4 +107,19 @@ function updateValues() {
     });
 }
 
-setInterval(updateValues, 4000);
+setInterval(updateValues, 2000);
+
+
+function setThemePreference() {
+    const themePreference = localStorage.getItem('themePreference');
+
+    console.log(themePreference);
+
+    if (themePreference === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+}
+
+window.addEventListener('load', setThemePreference);

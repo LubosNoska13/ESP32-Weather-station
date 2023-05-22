@@ -3,11 +3,13 @@ import secrets
 import json
 from PIL import Image
 from flask import render_template, flash, redirect, url_for, request, abort, jsonify
-from weather_station import app, db, bcrypt, mqtt
+from weather_station import app, db, bcrypt, mqtt, mail
 from weather_station.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from weather_station.models import Users, Posts
 from flask_login import login_user, current_user, logout_user, login_required
-
+from flask_mail import Message
+from weather_station.config import credentials
+from weather_station.config import send_email
 
 @app.context_processor 
 def recent_posts():
@@ -214,21 +216,30 @@ def logout():
     logout_user()
     return redirect(url_for("home"))
 
-
 data_list = []
 
 @mqtt.on_message()
 def on_message(client, userdata, message):
-    global last_message
     # Extract the subscription topic from the message
     topic = message.topic
     
     if topic == "esp32/data":
+        
         # Process the received message
         payload = message.payload.decode("utf-8")
         data = json.loads(payload)
-        print(data.get("temperature"))
-        last_message = data
+        
+        with app.app_context():  # create a Flask application context
+            
+            # Send email
+            if data.get("temperature") > send_email.SEND_EMAIL_TEMPERATURE:
+                msg = Message(send_email.EMAIL_TEMPERATURE_HEAD, sender=credentials.EMAIL, recipients=credentials.EMAIL_RECEIVERS)
+                msg.body = send_email.EMAIL_TEMPERATURE_CONTENT.format(data.get("temperature"))
+                mail.send(msg)
+                send_email.SEND_EMAIL_TEMPERATURE += 1
+                print("Email sent")
+        
+        print(data)
         
         # Only return the most recent 10 records
         if len(data_list) > 7:
@@ -236,7 +247,6 @@ def on_message(client, userdata, message):
         
         # Append the received data to the data_list
         data_list.append(data)
-        
 
 
 @app.route('/esp32/data')
