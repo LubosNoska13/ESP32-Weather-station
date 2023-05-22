@@ -3,3 +3,4 @@ credentials.py
 __pycache__/
 weather_station/static/images/profile_pics/
 .vscode/
+instance/
