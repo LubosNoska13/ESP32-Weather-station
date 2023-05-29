@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template
 from weather_station.models import Posts
 from flask_login import login_required
+from weather_station import app
 
 main = Blueprint("main", __name__)
 
-@main.context_processor 
+@app.context_processor 
 def recent_posts():
     r_posts = Posts.query.order_by(Posts.date_posted.desc()).limit(3)
     return dict(r_posts=r_posts)
