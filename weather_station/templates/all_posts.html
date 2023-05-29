@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Messages</h1>
-    <a href="{{ url_for('create_post') }}">
+    <a href="{{ url_for('posts.create_post') }}">
         <article class="article article-add">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>
             <h3>Add New Article</h3>
@@ -15,14 +15,14 @@
             <div class="article-head">
                 <img class="profile-photo" src="{{ url_for('static', filename='images/profile_pics/' + post.author.image_file ) }}" alt="" />
                 <div class="article-metadata">
-                    <a href="{{ url_for('user_posts', username=post.author.username) }}"><b>{{ post.author.username }}</b></a> <br />
+                    <a href="{{ url_for('posts.user_posts', username=post.author.username) }}"><b>{{ post.author.username }}</b></a> <br />
                     <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="heart" viewBox="0 0 24 24">
                     <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
             </div>
-            <h2><a href="{{ url_for('specific_post', post_id=post.id) }}">{{ post.title }}</a></h2>
+            <h2><a href="{{ url_for('posts.specific_post', post_id=post.id) }}">{{ post.title }}</a></h2>
             <p>{{ post.content }}</p>
         </article>
     {% endfor %}
@@ -31,9 +31,9 @@
         {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
             {% if page_num %}
                 {% if posts.page == page_num %}
-                    <a class="current-page glass" href="{{ url_for('posts', page=page_num) }}">{{ page_num }}</a>
+                    <a class="current-page glass" href="{{ url_for('posts.all_posts', page=page_num) }}">{{ page_num }}</a>
                 {% else %}
-                    <a href="{{ url_for('posts', page=page_num) }}">{{ page_num }}</a>
+                    <a href="{{ url_for('posts.all_posts', page=page_num) }}">{{ page_num }}</a>
                 {% endif %}
             {% else %}
                 ...

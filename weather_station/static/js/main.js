@@ -76,17 +76,17 @@ inputs.forEach((ipt) => {
 
 
 //! Close Model
-// const modal = document.querySelector("#modal")
-// const openModel = document.querySelector(".open-button");
-// const closeModel = document.querySelector(".close-button");
+const modal = document.querySelector("#modal")
+const openModel = document.querySelector(".open-button");
+const closeModel = document.querySelector(".close-button");
 
-// openModel.addEventListener("click", () => {
-//     modal.showModal();
-// });
+openModel.addEventListener("click", () => {
+    modal.showModal();
+});
 
-// closeModel.addEventListener("click", () => {
-//     modal.close();
-// });
+closeModel.addEventListener("click", () => {
+    modal.close();
+});
 
 
 const temperatureSpan = document.querySelector("#stream-temperature-value");

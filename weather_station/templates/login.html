@@ -46,7 +46,7 @@
                     <h3>New here ?</h3>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!</p>
                     <!-- <button class="btn transparent" id="register-btn">Register</button> -->
-                    <a href="{{ url_for('register') }}" class="btn transparent">Register</a>
+                    <a href="{{ url_for('users.register') }}" class="btn btn-transparent">Register</a>
                 </div>
                 <img src="{{ url_for('static', filename='images/login.svg' ) }}" alt="" />
             </div>
@@ -92,7 +92,7 @@
                     </div>
                 {% endif %}
 
-                {{ form.submit(class="btn") }}
+                {{ form.submit(class="btn btn-primary") }}
             </form>        
         </div>
         

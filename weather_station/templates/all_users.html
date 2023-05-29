@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>All Users </h1>
+    <p>{{ users.id }}</p>
+        <section class="main-table">
+            <table class="glass">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Posts</th>
+                        <th>Profile photo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td class="warning">{{ user.posts | length }}</td>
+                            <td class="primary">{{ user.image_file }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- <a href="#">Show All</a> -->
+        </section>
+{% endblock content %}

@@ -5,9 +5,9 @@
 
     <article class="article glass">
         <div class="article-head">
-            <img src="{{ url_for('static', filename='images/profile_pics/' + post.author.image_file ) }}" alt="" />
+            <img class="profile-photo" src="{{ url_for('static', filename='images/profile_pics/' + post.author.image_file ) }}" alt="" />
             <div class="article-metadata">
-                <a href="{{ url_for('user_posts', username=post.author.username) }}"><b>{{ post.author.username }}</b></a> <br />
+                <a href="{{ url_for('posts.user_posts', username=post.author.username) }}"><b>{{ post.author.username }}</b></a> <br />
                 <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" class="heart" viewBox="0 0 24 24">
@@ -18,7 +18,7 @@
         <p>{{ post.content }}</p>
         {% if post.author == current_user %}
             <div class="multiple-buttons">
-                <a class="btn btn-primary" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                <a class="btn btn-primary" href="{{ url_for('posts.update_post', post_id=post.id) }}">Update</a>
                 <button type="button" class="btn btn-danger open-button" data-toggle="modal" data-target="#deleteModal">Delete</button>
             </div>
         {% endif %}
@@ -31,7 +31,7 @@
 
         <div class="multiple-buttons">
             <button class="btn close-button">Cancel</button>
-            <form method="POST" action="{{ url_for('delete_post', post_id=post.id) }}">
+            <form method="POST" action="{{ url_for('posts.delete_post', post_id=post.id) }}">
                 <input class="btn btn-danger" type="submit" value="Delete" />
             </form>
         </div>

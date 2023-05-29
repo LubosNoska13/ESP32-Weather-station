@@ -115,7 +115,7 @@
                     </div>
                 {% endif %}
 
-                {{ form.submit(class="btn") }}
+                {{ form.submit(class="btn btn-primary") }}
             </form>
             
             <!-- Panel -->
@@ -123,7 +123,7 @@
                 <div class="form-panel-text">
                     <h3>New here ?</h3>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!</p>
-                    <a href="{{ url_for('login') }}" class="btn transparent">Login</a>
+                    <a href="{{ url_for('users.login') }}" class="btn btn-transparent">Login</a>
                 </div>
                 <img src="{{ url_for('static', filename= 'images/register.svg')}}" alt="" />
             </div>
