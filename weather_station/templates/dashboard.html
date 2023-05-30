@@ -122,3 +122,7 @@
         <!-- <a href="#">Show All</a> -->
     </section>
 {% endblock content %}
+
+{% block additional_imports %}
+    <script src="{{ url_for('static', filename='js/update_data.js')}}"></script>
+{% endblock additional_imports %}

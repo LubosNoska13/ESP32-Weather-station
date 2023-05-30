@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from weather_station import db, bcrypt
 from weather_station.models import Users 
 from weather_station.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
-from weather_station.users.utils import save_picture
+from weather_station.users.utils import save_picture, remove_unnecessary_images
 
 users = Blueprint("users", __name__)
 
@@ -76,6 +76,8 @@ def settings():
         current_user.username = update_form.username.data
         current_user.email = update_form.email.data
         db.session.commit()
+        
+        remove_unnecessary_images()
         
         flash("Your account has been updated!", "success")
         return redirect(url_for("users.settings"))

@@ -6,12 +6,12 @@ class Config:
     SQLALCHEMY_DATABASE_URI = credentials.DATABASE_URI
     
     # Broker config
-    MQTT_BROKER_URL = credentials.MQTT_BROKER_URL  # use the free broker from HIVEMQ
-    MQTT_BROKER_PORT = credentials.MQTT_BROKER_PORT  # default port for non-tls connection
-    MQTT_USERNAME = credentials.MQTT_USERNAME  # set the username here if you need authentication for the broker
-    MQTT_PASSWORD = credentials.MQTT_PASSWORD  # set the password here if the broker demands authentication
-    MQTT_KEEPALIVE = credentials.MQTT_KEEPALIVE  # set the time interval for sending a ping to the broker to 5 seconds
-    MQTT_TLS_ENABLED = credentials.MQTT_TLS_ENABLED  # set TLS to disabled for testing purposes
+    MQTT_BROKER_URL = credentials.MQTT_BROKER_URL
+    MQTT_BROKER_PORT = credentials.MQTT_BROKER_PORT 
+    MQTT_USERNAME = credentials.MQTT_USERNAME  
+    MQTT_PASSWORD = credentials.MQTT_PASSWORD  
+    MQTT_KEEPALIVE = credentials.MQTT_KEEPALIVE  
+    MQTT_TLS_ENABLED = credentials.MQTT_TLS_ENABLED  
 
     # Email config
     MAIL_SERVER = credentials.EMAIL_SERVER

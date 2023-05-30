@@ -75,39 +75,7 @@ inputs.forEach((ipt) => {
 });
 
 
-//! Close Model
-const modal = document.querySelector("#modal")
-const openModel = document.querySelector(".open-button");
-const closeModel = document.querySelector(".close-button");
 
-openModel.addEventListener("click", () => {
-    modal.showModal();
-});
-
-closeModel.addEventListener("click", () => {
-    modal.close();
-});
-
-
-const temperatureSpan = document.querySelector("#stream-temperature-value");
-const humiditySpan = document.querySelector("#stream-humidity-value");
-
-function updateValues() {
-    fetch('/esp32/data')
-        .then(response => response.json())
-        .then(data => {
-        
-        
-        const temperature = parseFloat(data.pop()["temperature"].toFixed(2));
-        const humidity = data.pop()["humidity"];
-        
-        temperatureSpan.innerHTML = temperature;
-        humiditySpan.innerHTML = humidity;
-        
-    });
-}
-
-setInterval(updateValues, 2000);
 
 
 function setThemePreference() {
