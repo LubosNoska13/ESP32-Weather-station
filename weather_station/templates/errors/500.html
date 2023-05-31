@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="error-message">
+        <h1>Something went wrong (500)</h1>
+        <p>We're experiencing some trouble on our end. Please try again in the near future.</p>
+        <img src="{{ url_for('static', filename='images/500.svg') }}" alt="" />
+    </div>
+{% endblock content %}

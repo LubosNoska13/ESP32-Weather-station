@@ -41,12 +41,14 @@ def create_app(config_class=Config):
     from weather_station.main.routes import main
     from weather_station.data.routes import data
     from weather_station.data.api import api
+    from weather_station.errors.handlers import errors
 
     app.register_blueprint(users)
     app.register_blueprint(posts)
     app.register_blueprint(main)
     app.register_blueprint(data)
     app.register_blueprint(api)
+    app.register_blueprint(errors)
 
 
     @app.context_processor 

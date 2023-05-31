@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from weather_station import db, bcrypt
-from weather_station.models import Users 
+from weather_station.models import Users, Weather
 from weather_station.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from weather_station.users.utils import save_picture, remove_unnecessary_images
 
@@ -94,7 +94,8 @@ def settings():
 @login_required
 def all_users():
     users = Users.query.order_by(Users.id)
-    return render_template("all_users.html", title="All Users", users=users)
+    data = Weather.query.order_by(Weather.id)
+    return render_template("all_users.html", title="All Users", users=users, data=data)
 
 
 @users.route("/logout")

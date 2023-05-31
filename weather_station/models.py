@@ -28,3 +28,13 @@ class Posts(db.Model):
     
     def __repr__(self):
         return f"Posts('{self.title}', '{self.date_posted}')"
+
+
+class Weather(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    values = db.Column(db.JSON, nullable=False)
+    device = db.Column(db.String(25), nullable=False)
+    
+    def __repr__(self):
+        return f"Weather('{self.date}', '{self.device}')"

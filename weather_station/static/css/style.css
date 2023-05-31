@@ -302,6 +302,16 @@ b {
     border-radius: var(--border-radius-3);
 }   
 
+.error-message {
+    text-align: center;
+}
+.error-message h1 {
+    margin: 1.5rem 0;
+}
+.error-message img {
+    margin: 2.5rem 0;
+    width: 50%;
+}
 /* .btn {
     display: inline-block;
     padding: 1.1rem 2rem;

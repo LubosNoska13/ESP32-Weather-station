@@ -28,4 +28,29 @@
             </table>
             <!-- <a href="#">Show All</a> -->
         </section>
+
+
+    <h1>Database</h1>
+    <!-- <p>{{ users.id }}</p> -->
+        <section class="main-table">
+            <table class="glass">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Values</th>
+                        <th>Device</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in data %}
+                        <tr>
+                            <td>{{ d.date }}</td>
+                            <td>{{ d.values }}</td>
+                            <td class="warning">{{ d.device }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- <a href="#">Show All</a> -->
+        </section>
 {% endblock content %}
