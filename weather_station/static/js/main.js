@@ -73,21 +73,3 @@ inputs.forEach((ipt) => {
         ipt.parentNode.classList.remove("focus");
     });
 });
-
-
-
-
-
-function setThemePreference() {
-    const themePreference = localStorage.getItem('themePreference');
-
-    console.log(themePreference);
-
-    if (themePreference === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-    }
-}
-
-window.addEventListener('load', setThemePreference);

@@ -1,6 +1,7 @@
 
 const temperatureSpan = document.querySelector("#stream-temperature-value");
 const humiditySpan = document.querySelector("#stream-humidity-value");
+const co2Span = document.querySelector("#stream-co2-value");
 
 function updateValues() {
     fetch('/esp32/data')
@@ -9,9 +10,11 @@ function updateValues() {
         
         const temperature = parseFloat(data.pop()["temperature"].toFixed(2));
         const humidity = data.pop()["humidity"];
-        console.log("Hello")
+        const co2 = parseInt(data.pop()["co2"]);
+        
         temperatureSpan.innerHTML = temperature;
         humiditySpan.innerHTML = humidity;
+        co2Span.innerHTML = co2;
         
     });
 }
