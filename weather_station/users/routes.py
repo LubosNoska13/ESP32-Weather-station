@@ -94,8 +94,7 @@ def settings():
 @login_required
 def all_users():
     users = Users.query.order_by(Users.id)
-    data = Weather.query.order_by(Weather.id)
-    return render_template("all_users.html", title="All Users", users=users, data=data)
+    return render_template("all_users.html", title="All Users", users=users)
 
 
 @users.route("/logout")
