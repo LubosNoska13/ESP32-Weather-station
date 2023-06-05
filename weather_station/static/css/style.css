@@ -302,15 +302,26 @@ b {
     border-radius: var(--border-radius-3);
 }   
 
-.error-message {
-    text-align: center;
+
+/* Error page */
+.error-page {
+    overflow: hidden;
 }
-.error-message h1 {
+.error-page .error-message {
+    /* text-align: center; */
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.error-page .error-message h1 {
     margin: 1.5rem 0;
 }
-.error-message img {
-    margin: 2.5rem 0;
-    width: 50%;
+.error-page .error-message img {
+    margin-top: 9vh;
+    width: 40%;
 }
 /* .btn {
     display: inline-block;
@@ -1214,7 +1225,9 @@ main .main-table table {
     border-bottom: 1px solid var(--color-light);
     /* color: var(--color-dark-variant); */
 }
-
+.main-table table tbody td:first-child {
+    text-wrap: nowrap;
+} 
 .main-table table tr:last-child td {
     border: none;
 }
