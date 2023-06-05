@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Database</h1>
+        <section class="main-table">
+            <table class="glass">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Values</th>
+                        <th>Device</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in database %}
+                        <tr>
+                            <td>{{ record.date }}</td>
+                            <td>{{ record.values }}</td>
+                            <td class="warning">{{ record.device }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- <a href="#">Show All</a> -->
+        </section>
+{% endblock content %}

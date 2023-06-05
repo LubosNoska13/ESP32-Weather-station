@@ -32,7 +32,7 @@ class Posts(db.Model):
 
 class Weather(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.now)
     values = db.Column(db.JSON, nullable=False)
     device = db.Column(db.String(25), nullable=False)
     
