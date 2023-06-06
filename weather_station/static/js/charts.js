@@ -77,7 +77,9 @@ const TemperatureData = {
     label: 'Temperature',
     borderWidth: 3,
     fill: true,
-    data: []
+    data: [],
+    backgroundColor: 'rgba(255, 99, 132, 0.5)', // Bar colorolor
+    borderColor: 'rgba(255, 99, 132, 1)', // Border color
   }]
 };
 const HumidityData = {
@@ -87,6 +89,7 @@ const HumidityData = {
     borderWidth: 3,
     fill: true,
     data: []
+    
   }]
 };
 const WifiData = {
@@ -95,7 +98,9 @@ const WifiData = {
     label: 'Wifi signal strength',
     borderWidth: 3,
     fill: true,
-    data: []
+    data: [],
+    backgroundColor: 'rgba(255, 152, 0, 0.5)', // Bar colorolor
+    borderColor: '#E65100', // Border color
   }]
 };
 
@@ -125,7 +130,7 @@ const AcetonData = {
   borderWidth: 3,
   fill: true,
   type: 'line',
-  backgroundColor: '#4CAF50', // Bar colorolor
+  backgroundColor: 'rgba(76, 175, 80, 0.5)', // Bar colorolor
   borderColor: '#2E7D32', // Border color
 }
 
@@ -135,7 +140,7 @@ const AlcoholData = {
   borderWidth: 3,
   fill: true,
   type: 'line',
-  backgroundColor: '#9C27B0', // Bar colorolor
+  backgroundColor: 'rgba(156, 39, 176, 0.5)', // Bar colorolor
   borderColor: '#4A148C', // Border color
 }
 
@@ -145,7 +150,7 @@ const ToluenData = {
   borderWidth: 3,
   fill: true,
   type: 'line',
-  backgroundColor: '#FF9800', // Bar colorolor
+  backgroundColor: 'rgba(255, 152, 0, 0.5)', // Bar colorolor
   borderColor: '#E65100', // Border color
 }
 
@@ -155,7 +160,7 @@ const Nh4Data = {
   borderWidth: 3,
   fill: true,
   type: 'line',
-  backgroundColor: '#E91E63', // Bar colorolor
+  backgroundColor: 'rgba(233, 30, 99, 0.5)', // Bar colorolor
   borderColor: '#880E4F', // Border color
 }
 
