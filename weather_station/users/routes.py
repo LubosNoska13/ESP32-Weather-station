@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, url_for, flash, redirect, request
+from flask import Blueprint, render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from weather_station import db, bcrypt
-from weather_station.models import Users, Weather
+from weather_station.models import Users
 from weather_station.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from weather_station.users.utils import save_picture, remove_unnecessary_images
 
@@ -93,8 +93,22 @@ def settings():
 @users.route("/all_users")
 @login_required
 def all_users():
+    if current_user.is_admin is False:
+        abort(403)
     users = Users.query.order_by(Users.id)
     return render_template("all_users.html", title="All Users", users=users)
+
+
+@users.route('/toggle_dark_mode', methods=['POST'])
+def toggle_dark_mode():
+    data = request.get_json()
+    dark_mode = data['dark_mode']
+    
+    # Store the user's preference in the user object
+    current_user.dark_mode = dark_mode
+    db.session.commit()
+    
+    return {'status': 'success'}
 
 
 @users.route("/logout")

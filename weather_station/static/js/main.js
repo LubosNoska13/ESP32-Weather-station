@@ -13,12 +13,22 @@ closeBtn.addEventListener("click", () => {
 
 //! Change theme
 const themeToggler = document.querySelector(".theme-toggler");
+const body = document.querySelector('body');
 
 themeToggler.addEventListener("click", () => {
     document.body.classList.toggle("dark-theme-variables");
     
     themeToggler.querySelector("svg:nth-child(1)").classList.toggle("active");
     themeToggler.querySelector("svg:nth-child(2)").classList.toggle("active");
+    
+    // Store the user's preference in the session
+    fetch('/toggle_dark_mode', {
+        method: 'POST',
+        body: JSON.stringify({'dark_mode': body.classList.contains('dark-theme-variables')}),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
 })
 
 const links = document.querySelectorAll('.sidebar a');

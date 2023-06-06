@@ -116,7 +116,7 @@ a {
 } */
 
 h1 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 800;
 }
 
@@ -126,11 +126,11 @@ h2 {
 }
 
 h3 {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
 }
 
 h4 {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 h5 {
@@ -301,6 +301,27 @@ b {
     padding: var(--card-padding);
     border-radius: var(--border-radius-3);
 }   
+.space {
+    width: 100%;
+    height: 5vh;
+}
+/* Device page */
+.devices h2 {
+    text-align: center;
+}
+
+.devices .content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.devices .content img {
+    width: 70%;
+}
+
+.devices .content-specifications > h4 {
+    margin: 0.7rem 0;
+}
 
 
 /* Error page */
@@ -1090,7 +1111,7 @@ main .insights {
     margin: 1rem 0 2rem 0;
 }
 
-main .insights > div {
+main .insights > a {
     /* background: var(--color-white); */
     padding: var(--card-padding);
     border-radius: var(--card-border-radius);
@@ -1103,11 +1124,11 @@ main .insights > div {
     /* backdrop-filter: blur(2rem); */
 }
 
-main .insights > div:hover {
+main .insights > a:hover {
     box-shadow: none;
 }
 
-main .insights > div .icon-max {
+main .insights > a .icon-max {
     background: var(--color-primary);
     padding: 0.5rem;
     border-radius: 50%;
@@ -1115,23 +1136,23 @@ main .insights > div .icon-max {
     height: 42px; */
 }
 
-main .insights > div .icon-max path {
+main .insights > a .icon-max path {
     fill: var(--color-white);
 }
 
-main .insights > div.temperature-item .icon-max {
+main .insights > a.temperature-item .icon-max {
     background: var(--color-danger);
 }
 
-main .insights > div.humidity-item .icon-max {
+main .insights > a.humidity-item .icon-max {
     background: var(--color-primary);
 }
 
-main .insights > div.pressure-item .icon-max {
+main .insights > a.pressure-item .icon-max {
     background: var(--color-success);
 }
 
-main .insights > div .middle {
+main .insights > a .middle {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1225,6 +1246,11 @@ main .main-table table {
     border-bottom: 1px solid var(--color-light);
     /* color: var(--color-dark-variant); */
 }
+
+.main-table table tbody td:nth-of-type(3) {
+    font-weight: bold;
+}
+
 .main-table table tbody td:first-child {
     text-wrap: nowrap;
 } 
@@ -1471,12 +1497,12 @@ main .main-table table {
         width: 85%;
     }
 
-    main table thead tr th:first-child,
+    main table thead tr th:nth-of-type(2),
     main table thead tr th:last-child {
         display: none;
     }
 
-    main table tbody tr td:first-child,
+    main table tbody tr td:nth-of-type(2),
     main table tbody tr td:last-child {
         display: none;
     }
