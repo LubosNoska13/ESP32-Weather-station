@@ -14,7 +14,7 @@
                 <tbody>
                     {% for record in database %}
                         <tr>
-                            <td>{{ record.date }}</td>
+                            <td>{{ record.date.strftime('%m/%d/%y %H:%M')}}</td>
                             <td>{{ record.values }}</td>
                             <td class="warning">{{ record.device }}</td>
                         </tr>
