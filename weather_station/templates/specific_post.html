@@ -16,7 +16,7 @@
         </div>
         <h2>{{ post.title }}</h2>
         <p>{{ post.content }}</p>
-        {% if post.author == current_user %}
+        {% if post.author == current_user or current_user.is_admin == True %}
             <div class="multiple-buttons">
                 <a class="btn btn-primary" href="{{ url_for('posts.update_post', post_id=post.id) }}">Update</a>
                 <button type="button" class="btn btn-danger open-button" data-toggle="modal" data-target="#deleteModal">Delete</button>
@@ -41,5 +41,5 @@
 {% endblock content %}
 
 {% block additional_imports %}
-    <script src="url_for('static', filename='js/modal.js')"></script>
+    <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock additional_imports %}

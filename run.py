@@ -29,7 +29,8 @@ def on_message(client, userdata, message):
         d.store_data(app)
     
 if __name__ == "__main__":
+    # Create a database
     # from weather_station import db
     # with app.app_context():
-    #     db.create_all()
+        # db.create_all()
     app.run(host="0.0.0.0", port=5500, threaded=False, debug=True, use_reloader=False)

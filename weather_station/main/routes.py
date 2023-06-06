@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template 
-from flask_login import login_required
+from flask import Blueprint, render_template, abort
+from flask_login import login_required, current_user
 from weather_station.models import Weather
 
 main = Blueprint("main", __name__)
@@ -19,5 +19,7 @@ def dashboard():
 @main.route("/data")
 @login_required
 def data():
+    if current_user.is_admin is False:
+        abort(403)
     database = Weather.query.order_by(Weather.id)
     return render_template("data.html", database=database)

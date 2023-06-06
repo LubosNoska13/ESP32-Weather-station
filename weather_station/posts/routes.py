@@ -45,7 +45,9 @@ def specific_post(post_id):
 @login_required
 def update_post(post_id):
     post = Posts.query.get_or_404(post_id)
-    if post.author != current_user:
+    if current_user.is_admin or post.author == current_user:
+        pass
+    else:
         abort(403)
     
     form = PostForm()
@@ -68,7 +70,9 @@ def update_post(post_id):
 @login_required
 def delete_post(post_id):
     post = Posts.query.get_or_404(post_id)
-    if post.author != current_user:
+    if current_user.is_admin or post.author == current_user:
+        pass
+    else:
         abort(403)
         
     db.session.delete(post)

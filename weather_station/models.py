@@ -13,6 +13,8 @@ class Users(db.Model, UserMixin):
     email = db.Column(db.String(40), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default="default.jpg")
     password = db.Column(db.String(70), nullable=False)
+    is_admin = db.Column(db.Boolean, unique=False, default=False)
+    dark_mode = db.Column(db.Boolean, unique=False, default=False)
     posts = db.relationship("Posts", backref="author", lazy=True)
     
     def __repr__(self):

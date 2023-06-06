@@ -4,6 +4,7 @@ from flask_login import login_required
 data = Blueprint("data", __name__)
 
 @data.route("/weather")
+@login_required
 def weather():    
     return render_template("weather.html", title="Weather")
 

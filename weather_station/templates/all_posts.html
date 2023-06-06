@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h1>Messages</h1>
+    <h1>Posts</h1>
     <a href="{{ url_for('posts.create_post') }}">
         <article class="article article-add">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>
@@ -40,7 +40,5 @@
             {% endif %}
         {% endfor %}
     </div>
-
-
 
 {% endblock content %}

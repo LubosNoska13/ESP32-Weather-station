@@ -1,4 +1,33 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Our Devices</h1>
+    <h1>Devices</h1>
+    <h2>Server</h2>
+    <section class="glass item devices">
+        <h2>Raspberry Pi 3b+</h2>
+        <div class="content">
+            <img src="{{ url_for('static', filename='images/raspberry.png') }}" alt="" />
+            <div class="content-specifications">
+                <h4>OS</h4> <p>Ubuntu 22.04 LTS</p>
+                <h4>CPU</h4> <p>4x Broadcom BCM2837B0 (1.4GHz)</p>
+                <h4>RAM</h4> <p>1GB LPDDR2 SDRAM</p>
+                <h4>Features</h4> <p>Built-in Wifi 2.4GHz and 5GHz (802.11.b/g/n/ac), Bluetooth 4.2</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="space"></div>
+
+    <h2></h2>
+    <section class="glass item devices">
+        <h2>ESP32-WROOM</h2>
+        <div class="content">
+            <img src="{{ url_for('static', filename='images/esp32.png') }}" alt="" />
+            <div class="content-specifications">
+                <h4>CPU</h4> <p>2x Tensilica LX6 (240Mhz)</p>
+                <h4>RAM</h4> <p>4MB of integrated Flash</p>
+                <h4>Storage</h4> <p>520KB of SRAM for data storage</p>
+                <h4>Features</h4> <p>Built-in Wi-Fi (802.11 b/g/n) and Bluetooth 4.2</p>
+            </div>
+        </div>
+    </section>
 {% endblock content %}
