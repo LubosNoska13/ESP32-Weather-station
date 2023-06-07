@@ -23,9 +23,8 @@
             <div class="links">
             <ul>
                 <li><a href="#">Features</a></li>
-                <li><a href="#">Pricing</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <li><a href="{{ url_for('users.register') }}" class="btn btn-primary">Sign up</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="{{ url_for('users.login') }}" class="btn btn-primary">Sign in</a></li>
             </ul>
             </div>
 
@@ -46,7 +45,7 @@
                 Embrace the limitless possibilities of today and venture into the extraordinary. Seize the opportunity to understand the present and forecast the future. Start your adventure now and let the future unfold before your eyes.
             </p>
             <div class="cta">
-                <a href="#" class="btn btn-primary">Get started</a>
+                <a href="{{ url_for('users.register') }}" class="btn btn-primary">Get started</a>
             </div>
             </div>
 
