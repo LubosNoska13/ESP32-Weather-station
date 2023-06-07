@@ -21,5 +21,5 @@ def dashboard():
 def data():
     if current_user.is_admin is False:
         abort(403)
-    database = Weather.query.order_by(Weather.id)
+    database = Weather.query.order_by(Weather.date.desc()).all()
     return render_template("data.html", database=database)
