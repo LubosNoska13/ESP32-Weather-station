@@ -23,7 +23,7 @@ class Data:
             
             weather_data = Weather(values=self.all_data[-1], device="ESP32")
             current_time = datetime.now()
-            if current_time.minute % 2 == 0:
+            if current_time.minute % 30 == 0:
                 last_record = Weather.query.order_by(Weather.id.desc()).first()
                 
                 if last_record:
