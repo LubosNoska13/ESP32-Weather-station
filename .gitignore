@@ -4,3 +4,4 @@ __pycache__/
 weather_station/static/images/profile_pics/
 .vscode/
 instance/
+.pio/
