@@ -1,5 +1,6 @@
 venv/
 __pycache__/
+credentials.py
 weather_station/static/images/profile_pics/
 .vscode/
 instance/
