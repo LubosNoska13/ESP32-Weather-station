@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+                
+
+
+    <section class="insights">
+        <a href="{{ url_for('data.weather') }}#temperatureChart" class="temperature-item glass">
+            <!-- <div class="temperature-item glass"> -->
+                <!-- <span class="material-symbols-sharp">device_thermostat</span> -->
+                <svg class="icon-max" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>thermometer-lines</title><path d="M17 3H21V5H17V3M17 7H21V9H17V7M17 11H21V13H17.75L17 12.1V11M21 15V17H19C19 16.31 18.9 15.63 18.71 15H21M7 3V5H3V3H7M7 7V9H3V7H7M7 11V12.1L6.25 13H3V11H7M3 15H5.29C5.1 15.63 5 16.31 5 17H3V15M15 13V5C15 3.34 13.66 2 12 2S9 3.34 9 5V13C6.79 14.66 6.34 17.79 8 20S12.79 22.66 15 21 17.66 16.21 16 14C15.72 13.62 15.38 13.28 15 13M12 4C12.55 4 13 4.45 13 5V8H11V5C11 4.45 11.45 4 12 4Z" /></svg>
+                <div class="middle">
+                    <div class="left">
+                        <h3>Temperature</h3>
+                        <h1><span id="stream-temperature-value">-</span> °C</h1>
+                    </div>
+                    <div class="progress">
+                        <svg>
+                            <circle cx="38" cy="38" r="36"></circle>
+                        </svg>
+                        <!-- <div class="number">
+                            <p>81%</p>
+                        </div> -->
+                    </div>
+                </div>
+                <small class="text-muted">Last 4 Seconds</small>
+            <!-- </div> -->
+        </a>
+        
+
+        <a href="{{ url_for('data.weather') }}#humidityChart" class="humidity-item glass">
+            <!-- <span class="material-symbols-sharp">humidity_mid</span> -->
+            <svg class="icon-max" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>cloud-percent</title><path d="M21.86 12.5C21.1 11.63 20.15 11.13 19 11C19 9.05 18.32 7.4 16.96 6.04C15.6 4.68 13.95 4 12 4C10.42 4 9 4.47 7.75 5.43S5.67 7.62 5.25 9.15C4 9.43 2.96 10.08 2.17 11.1S1 13.28 1 14.58C1 16.09 1.54 17.38 2.61 18.43C3.69 19.5 5 20 6.5 20H18.5C19.75 20 20.81 19.56 21.69 18.69C22.56 17.81 23 16.75 23 15.5C23 14.35 22.62 13.35 21.86 12.5M9.45 9.03C10.23 9.03 10.87 9.67 10.87 10.45C10.87 11.23 10.23 11.87 9.45 11.87C8.67 11.87 8.03 11.23 8.03 10.45C8.03 9.67 8.67 9.03 9.45 9.03M14.55 16.97C13.77 16.97 13.13 16.33 13.13 15.55C13.13 14.77 13.77 14.13 14.55 14.13C15.33 14.13 15.97 14.77 15.97 15.55C15.97 16.33 15.33 16.97 14.55 16.97M9.2 17L8 15.8L14.8 9L16 10.2L9.2 17Z" /></svg>
+            <div class="middle">
+                <div class="left">
+                    <h3>Humidity</h3>
+                    <h1><span id="stream-humidity-value">-</span> %</h1>
+                </div>
+                <div class="progress">
+                    <svg>
+                        <circle cx="38" cy="38" r="36"></circle>
+                    </svg>
+                    <!-- <div class="number">
+                        <p>62%</p>
+                    </div> -->
+                </div>
+            </div>
+            <small class="text-muted">Last 4 Seconds</small>
+        </a>
+
+        <a href="{{ url_for('data.weather') }}#gasesChart" class="pressure-item glass">
+            <!-- <span class="material-symbols-sharp">compress</span> -->
+            <svg class="icon-max" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>molecule-co2</title><path d="M5,7A2,2 0 0,0 3,9V15A2,2 0 0,0 5,17H8V15H5V9H8V7H5M11,7A2,2 0 0,0 9,9V15A2,2 0 0,0 11,17H13A2,2 0 0,0 15,15V9A2,2 0 0,0 13,7H11M11,9H13V15H11V9M16,10.5V12H19V13.5H17.5A1.5,1.5 0 0,0 16,15V18H20.5V16.5H17.5V15H19A1.5,1.5 0 0,0 20.5,13.5V12A1.5,1.5 0 0,0 19,10.5H16Z" /></svg>
+            <div class="middle">
+                <div class="left">
+                    <h3>Carbon Dioxide</h3>
+                    <h1><span id="stream-co2-value">-</span></h1>
+                </div>
+                <div class="progress">
+                    <svg>
+                        <circle cx="38" cy="38" r="36"></circle>
+                    </svg>
+                    <!-- <div class="number">
+                        <p>44%</p>
+                    </div> -->
+                </div>
+            </div>
+            <small class="text-muted">Last 4 Seconds</small>
+        </a>
+    </section>
+
+    <section class="main-table">
+        <h2>Graphs</h2>
+        <table class="glass">
+            <thead>
+                <tr>
+                    <th>Gas</th>
+                    <th>Location</th>
+                    <th>Value</th>
+                    <th>Device</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CO</td>
+                    <td>Prievidza</td>
+                    <td><span id="stream-co-value">-</span></td>
+                    <td class="warning">ESP32</td>
+                    <td class="primary"><a href="{{ url_for('data.weather') }}#gasesChart">Details</a></td>
+
+                </tr>
+                <tr>
+                    <td>Aceton</td>
+                    <td>Prievidza</td>
+                    <td><span id="stream-aceton-value">-</span></td>
+                    <td class="warning">ESP32</td>
+                    <td class="primary"><a href="{{ url_for('data.weather') }}#gasesChart">Details</a></td>
+
+                </tr>
+                <tr>
+                    <td>Alcohol</td>
+                    <td>Prievidza</td>
+                    <td><span id="stream-alcohol-value">-</span></td>
+                    <td class="warning">ESP32</td>
+                    <td class="primary"><a href="{{ url_for('data.weather') }}#gasesChart">Details</a></td>
+
+                </tr>
+                <tr>
+                    <td>NH4</td>
+                    <td>Prievidza</td>
+                    <td><span id="stream-nh4-value">-</span></td>
+                    <td class="warning">ESP32</td>
+                    <td class="primary"><a href="{{ url_for('data.weather') }}#gasesChart">Details</a></td>
+                </tr>
+                <tr>
+                    <td>Toluen</td>
+                    <td>Prievidza</td>
+                    <td><span id="stream-toluen-value">-</span></td>
+                    <td class="warning">ESP32</td>
+                    <td class="primary"><a href="{{ url_for('data.weather') }}#gasesChart">Details</a></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+{% endblock content %}
+
+{% block additional_imports %}
+    <script src="{{ url_for('static', filename='js/update_data.js')}}"></script>
+{% endblock additional_imports %}
