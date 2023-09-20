@@ -1,11 +1,11 @@
 #include "setwifi.h"
 
-void wifi_setup() {
+void WifiConnection::setup() {
     WiFi.mode(WIFI_MODE_STA);
-    WiFi.disconnect(true); // Disconnect from any previously connected network
+    WiFi.disconnect(true);          // Disconnect from any previously connected network
 }
 
-void scan_network() {
+void WifiConnection::scan_network() {
     Serial.println("Scanning for Wi-Fi networks...");
     int networkCount = WiFi.scanNetworks();
     if (networkCount == 0) {
@@ -20,8 +20,8 @@ void scan_network() {
     }
 }
 
-void connect_to_wifi(const char* const ssid, const char* const password) {
-    WiFi.begin(ssid, password);
+void WifiConnection::connect() {
+    WiFi.begin(SSID, PASSWORD);
     while (WiFi.status() != WL_CONNECTED) {
         delay(1000);
         Serial.println("Connecting to WiFi...");
