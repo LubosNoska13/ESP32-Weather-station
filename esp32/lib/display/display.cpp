@@ -1,27 +1,24 @@
+#include <string.h>
 #include "display.h"
 #include "icons.h"
 
-// Oled display
-Adafruit_SH1106G display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-
 // Setup Display
-void setup_display() {
-    display.begin(i2c_Address, true);
+void Display::setup() {
+    display.begin(I2C_ADDRESS, true);
     display.display();
     delay(2000);
     display.clearDisplay();
 }
 
-// Display values
-void displayData(const char* title, const uint8_t* main_icon, int main_icon_size, float value, int32_t rssi) {
-    display.clearDisplay();
+// Private Helper Methods
+void Display::show_title(const char* title) {
     display.setTextSize(1);
     display.setTextColor(SH110X_WHITE);
     display.setCursor(0, 1);
-
-    // Title
     display.println(title);
+} 
 
+void Display::show_wifi(int32_t rssi) {
     // Wifi signal icon
     if (rssi == 0) {
         display.drawBitmap(display.width()-14, 0, wifi_icon_no_signal, 14, 14, 1);
@@ -38,36 +35,55 @@ void displayData(const char* title, const uint8_t* main_icon, int main_icon_size
     else {
         display.drawBitmap(display.width()-14, 0, wifi_icon_no_signal, 14, 14, 1);
     }
+}
 
-    // Mqtt connection icon
+void Display::show_mqtt() {
     display.drawBitmap(display.width()-13-19, -1, connection_icon, 17, 17, 1);
+}
 
-    if (title == "Temperature" || title == "Humidity") {
-        display.drawBitmap(2, 15, main_icon, main_icon_size, main_icon_size, 1);
-        if (title == "Temperature") {
-            display.drawBitmap(90, 32, celsius_icon, 14, 14, 1);
-        }
-        else {
-            display.drawBitmap(90, 32, percent_icon, 13, 13, 1);
-        }
-    }
-    else if (title == "Carbon Monoxide") {
-        display.drawBitmap(-10, 5, main_icon, main_icon_size, main_icon_size, 1);
-    }
-    else if (title == "Carbon Dioxide") {
-        display.drawBitmap(-5, 5, main_icon, main_icon_size, main_icon_size, 1);
-    }
+void Display::show_main_value(const float value, const int8_t* idx) {
     display.setTextSize(2);
     display.setCursor(65, 35);
-    if (title == "Temperature") {
+
+    if (*idx == 0 || *idx == 1)
         display.println((int)value);
-    }
-    else if (title == "Humidity") {
-        display.println((int)value);
-    }
-    else {
+    else 
         display.println(value);
+}
+// Display values
+void Display::showData(JsonDocument& doc, const int8_t* idx) {
+    display.clearDisplay();
+    
+    char title[18];
+
+    switch (*idx) {
+        //display.drawBitmap(X_POSITION, Y_POSITION, ICON, ICON_X_SIZE, ICON_Y_SIZE, COLOR);
+        case 0:
+            strcpy(title, "Temperature");
+            display.drawBitmap(2, 15, temperature_icon, 50, 50, 1);
+            display.drawBitmap(90, 32, celsius_icon, 14, 14, 1);
+            break;
+        case 1:
+            strcpy(title, "Humidity");
+            display.drawBitmap(2, 15, humidity_icon, 52, 52, 1);
+            display.drawBitmap(90, 32, percent_icon, 13, 13, 1);
+            break;
+        case 2:
+            strcpy(title, "Carbon Monoxide");
+            display.drawBitmap(-10, 5, co_icon, 70, 70, 1);
+            break;
+        case 3:
+            strcpy(title, "Carbon Dioxide");
+            display.drawBitmap(-5, 5, co2_icon, 70, 70, 1);
+            break;
+        default:
+            break;
     }
+
+    show_title(title);
+    show_wifi(doc["Wifi"]);
+    show_mqtt();
+    show_main_value(doc[title], idx);
 
     display.display();
 }
