@@ -14,5 +14,6 @@ static const char* const mqttTopic = "esp32/data";
 
 // General settings
 static const char* const device = "ESP32";
+const uint16_t frequency_of_reading_data = 10000ul;         // every 10 seconds 
 
-#endif  // SETTINGS_H
+#endif  // CONFIG_H
