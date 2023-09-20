@@ -1,26 +1,16 @@
 #include "mq135.h"
 
-// MQ135 (gas sensor) settings
-const char* placa = "ESP-32";
-#define Voltage_Resolution 3.3
-#define pin 39 // Analog input 0 of your Arduino
-const char* type = "MQ-135";
-#define ADC_Bit_Resolution 12 
-#define RatioMQ135CleanAir 3.6 // RS / R0 = 3.6 ppm 
-
-MQUnifiedsensor MQ135(placa, Voltage_Resolution, ADC_Bit_Resolution, pin, type);
-
-void setup_mq135() {
-    MQ135.setRegressionMethod(1); //_PPM =  a*ratio^b
-    MQ135.init(); 
+void MqSensor::setup() {
+    gass_sensor.setRegressionMethod(1); //_PPM =  a*ratio^b
+    gass_sensor.init(); 
     Serial.print("Calibrating please wait.");
     float calcR0 = 0;
     for(int i = 1; i <= 10; i++) {
-        MQ135.update(); // Update data, the Arduino will read the voltage from the analog pin
-        calcR0 += MQ135.calibrate(RatioMQ135CleanAir);
+        gass_sensor.update(); // Update data, the Arduino will read the voltage from the analog pin
+        calcR0 += gass_sensor.calibrate(RatioMQ135CleanAir);
         Serial.print(".");
     }
-    MQ135.setR0(calcR0/10);
+    gass_sensor.setR0(calcR0/10);
     Serial.println("  done!.");
     
     if(isinf(calcR0)) {
@@ -31,4 +21,27 @@ void setup_mq135() {
         Serial.println("Warning: Connection issue found, R0 is zero (Analog pin shorts to ground). Please check your wiring and supply");
         while(1);
     }
+}
+
+void MqSensor::readData(JsonDocument& doc) {
+    gass_sensor.update(); // Update data, the arduino will read the voltage from the analog pin
+
+    gass_sensor.setA(605.18); gass_sensor.setB(-3.937); // Configure the equation to calculate CO concentration value
+    doc["Carbon Monoxide"] = gass_sensor.readSensor(); // Sensor will read PPM concentration using the model, a and b values set previously or from the setup
+
+    gass_sensor.setA(77.255); gass_sensor.setB(-3.18); //Configure the equation to calculate Alcohol concentration value
+    doc["Alcohol"] = gass_sensor.readSensor(); // SSensor will read PPM concentration using the model, a and b values set previously or from the setup
+
+    gass_sensor.setA(110.47); gass_sensor.setB(-2.862); // Configure the equation to calculate CO2 concentration value
+    doc["Carbon Dioxide"] = gass_sensor.readSensor(); // Sensor will read PPM concentration using the model, a and b values set previously or from the setup
+
+    gass_sensor.setA(44.947); gass_sensor.setB(-3.445); // Configure the equation to calculate Toluen concentration value
+    doc["Toluen"] = gass_sensor.readSensor(); // Sensor will read PPM concentration using the model, a and b values set previously or from the setup
+    
+    gass_sensor.setA(102.2 ); gass_sensor.setB(-2.473); // Configure the equation to calculate NH4 concentration value
+    doc["NH4"] = gass_sensor.readSensor(); // Sensor will read PPM concentration using the model, a and b values set previously or from the setup
+
+    gass_sensor.setA(34.668); gass_sensor.setB(-3.369); // Configure the equation to calculate Aceton concentration value
+    doc["Aceton"] = gass_sensor.readSensor(); // Sensor will read PPM concentration using the model, a and b values set previously or from the setup
+    
 }
