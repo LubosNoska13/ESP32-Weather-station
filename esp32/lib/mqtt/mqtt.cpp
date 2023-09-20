@@ -1,14 +1,12 @@
 #include "mqtt.h"
 
-WiFiClient espClient;
-PubSubClient client(espClient);
-
 // MQTT connection
-void mqtt_connection(const char* const mqttServer, const int mqttPort, const char* const mqttUser, const char* const mqttPassword) {
-    client.setServer(mqttServer, mqttPort);
+void MqttConnection::connect() {
+    client.setServer(MQTT_SERVER, MQTT_PORT);
+
     while (!client.connected()) {
         Serial.println("Connecting to MQTT broker...");
-        if (client.connect("ESP32Client", mqttUser, mqttPassword)) {
+        if (client.connect("ESP32Client", MQTT_USER, MQTT_PASSWORD)) {
             Serial.println("Connected to MQTT broker.");
         } else {
             Serial.print("Failed to connect to MQTT broker, rc=");
