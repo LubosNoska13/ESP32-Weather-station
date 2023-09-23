@@ -13,8 +13,10 @@ def all_posts():
     page = request.args.get("page", default=1, type=int)
     
     ## Show only 5 posts per page
-    posts = Posts.query.order_by(Posts.date_posted.desc()).paginate(per_page=4, page=page)
-    return render_template("all_posts.html", title="Posts", posts=posts)
+    posts_per_page = 4
+    posts = Posts.query.order_by(Posts.date_posted.desc()).paginate(per_page=posts_per_page, page=page)
+    number_of_posts = Posts.query.count()
+    return render_template("all_posts.html", title="Posts", posts=posts, number_of_posts=number_of_posts, posts_per_page=posts_per_page)
 
 
 @posts.route("/posts/new", methods=["GET", "POST"])

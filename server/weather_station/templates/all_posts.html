@@ -28,17 +28,19 @@
     {% endfor %}
 
     <div class="page-numbers">
-        {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-            {% if page_num %}
-                {% if posts.page == page_num %}
-                    <a class="current-page glass" href="{{ url_for('posts.all_posts', page=page_num) }}">{{ page_num }}</a>
+        {% if number_of_posts > posts_per_page %}
+            {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                    {% if posts.page == page_num %}
+                        <a class="current-page glass" href="{{ url_for('posts.all_posts', page=page_num) }}">{{ page_num }}</a>
+                    {% else %}
+                        <a href="{{ url_for('posts.all_posts', page=page_num) }}">{{ page_num }}</a>
+                    {% endif %}
                 {% else %}
-                    <a href="{{ url_for('posts.all_posts', page=page_num) }}">{{ page_num }}</a>
+                    ...
                 {% endif %}
-            {% else %}
-                ...
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
     </div>
 
 {% endblock content %}

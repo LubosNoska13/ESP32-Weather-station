@@ -188,6 +188,11 @@ b {
     background: var(--color-item);
 }
 
+.footer {
+    bottom: 0;
+    left: 0;
+}
+
 /* .big-title h1 {
     font-size: 2.5rem;
     text-transform: capitalize;
@@ -409,7 +414,7 @@ aside .top {
 aside .logo {
     display: flex;
     gap: 0.8rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 aside .logo img {
