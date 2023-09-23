@@ -13,14 +13,14 @@ function updateValues() {
         .then(response => response.json())
         .then(data => {
         
-        const temperature = parseFloat(data.pop()["temperature"].toFixed(2));
-        const humidity = data.pop()["humidity"];
-        const co2 = parseInt(data.pop()["co2"]);
-        const co = data.pop()["co"]
-        const aceton = data.pop()["aceton"]
-        const alcohol = data.pop()["alcohol"]
-        const nh4 = data.pop()["nh4"]
-        const toluen = data.pop()["toluen"]
+        const temperature = parseFloat(data.pop()["Temperature"]).toFixed(2);
+        const humidity = data.pop()["Humidity"];
+        const co2 = parseInt(data.pop()["Carbon Dioxide"]);
+        const co = data.pop()["Carbon Monoxide"];
+        const aceton = data.pop()["Aceton"];
+        const alcohol = data.pop()["Alcohol"];
+        const nh4 = data.pop()["NH4"];
+        const toluen = data.pop()["Toluen"];
         
         temperatureSpan.innerHTML = temperature;
         humiditySpan.innerHTML = humidity;
@@ -33,4 +33,4 @@ function updateValues() {
     });
 }
 updateValues()
-setInterval(updateValues, 3500);
+setInterval(updateValues, 5000);

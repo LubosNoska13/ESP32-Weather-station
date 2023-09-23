@@ -28,17 +28,17 @@ dateInput.addEventListener('change', () => {
 
 function updateCharts(data, labels, real_time) {
   //==== Sort all data 
-  console.log(data)
+  console.log(data.Temperature)
   console.log(labels)
-  const arr_temperature = data.map(item => item.temperature);
-  const arr_humidity = data.map(item => item.humidity);
-  const arr_wifi = data.map(item => item.wifi);
-  const arr_co = data.map(item => item.co);
-  const arr_co2 = data.map(item => item.co2);
-  const arr_aceton = data.map(item => item.aceton)
-  const arr_alcohol = data.map(item => item.alcohol)
-  const arr_toluen = data.map(item => item.toluen)
-  const arr_nh4 = data.map(item => item.nh4)
+  const arr_temperature = data.map(item => item["Temperature"]);
+  const arr_humidity = data.map(item => item["Humidity"]);
+  const arr_wifi = data.map(item => item["Wifi"]);
+  const arr_co = data.map(item => item["Carbon Monoxide"]);;
+  const arr_co2 = data.map(item => item["arbon Dioxide"]);
+  const arr_aceton = data.map(item => item["Aceton"]);
+  const arr_alcohol = data.map(item => item["Alcohol"]);
+  const arr_toluen = data.map(item => item["Toluen"]);
+  const arr_nh4 = data.map(item => item["NH4"]);
 
   console.log(arr_temperature)
 
