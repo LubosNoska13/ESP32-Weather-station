@@ -47,19 +47,27 @@ links.forEach(link => {
 
 
 //! Beating heart
-const articles = document.querySelectorAll(".article")
+const articles = document.querySelectorAll(".article");
 
 articles.forEach(article => {
     article.addEventListener("click", () => {
-    const heart = article.querySelector(".heart");
-
-    if(heart.classList.contains('like')) {
-        heart.classList.remove('like');
-        heart.classList.add('unlike');
-    } else {
-        heart.classList.remove('unlike');
-        heart.classList.add('like');
-    }
+        const heart = article.querySelector(".heart");
+        const postID = article.dataset.postId; // Retrieve the post_id from data attribute
+        if(heart.classList.contains('like')) {
+            heart.classList.remove('like');
+            heart.classList.add('unlike');
+        } else {
+            heart.classList.remove('unlike');
+            heart.classList.add('like');
+        }
+        // Store the user's preference in the session
+        fetch('/toggle_article_like', {
+            method: 'POST',
+            body: JSON.stringify({'post_id':postID, 'article_like': heart.classList.contains('like')}),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
     });
 });
 

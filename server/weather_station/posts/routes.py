@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, flash, redirect, request, abort
 from flask_login import current_user, login_required
 from weather_station import db
-from weather_station.models import Posts, Users
+from weather_station.models import Posts, Users, Likes
 from weather_station.posts.forms import PostForm
 
 posts = Blueprint("posts", __name__)
@@ -9,14 +9,21 @@ posts = Blueprint("posts", __name__)
 @posts.route("/posts")
 @login_required
 def all_posts():
+    def post_like_value(post_id):
+        # Retrieve the user's like_value for the given post
+        like = Likes.query.filter_by(user_id=current_user.id, post_id=post_id).first()
+        if like:
+            return like.like_value
+        return False  # Default to False if no like exists
+
     ## Get page number in url
     page = request.args.get("page", default=1, type=int)
     
-    ## Show only 5 posts per page
+    ## Show only 4 posts per page
     posts_per_page = 4
     posts = Posts.query.order_by(Posts.date_posted.desc()).paginate(per_page=posts_per_page, page=page)
     number_of_posts = Posts.query.count()
-    return render_template("all_posts.html", title="Posts", posts=posts, number_of_posts=number_of_posts, posts_per_page=posts_per_page)
+    return render_template("all_posts.html", title="Posts", posts=posts, number_of_posts=number_of_posts, posts_per_page=posts_per_page, post_like_value=post_like_value)
 
 
 @posts.route("/posts/new", methods=["GET", "POST"])
@@ -96,3 +103,22 @@ def user_posts(username):
     posts = Posts.query.filter_by(author=user).order_by(Posts.date_posted.desc()).paginate(per_page=4, page=page)
     return render_template("user_posts.html", title="User Posts", posts=posts, user=user)
 
+
+@posts.route("/toggle_article_like", methods=["POST"])
+def toggle_article_like():
+    data = request.get_json()
+    like_article = data["article_like"]
+    post_id = data["post_id"]
+
+    ## Create a like instance
+    like = Likes.query.filter_by(user_id=current_user.id, post_id=post_id).first()
+    
+    if like:
+        like.like_value = like_article
+    else:
+        like = Likes(user_id=current_user.id, post_id=post_id, like_value=like_article)
+        db.session.add(like)
+    
+    db.session.commit()
+    
+    return {'status': 'success'}

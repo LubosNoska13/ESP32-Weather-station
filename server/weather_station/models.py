@@ -16,6 +16,7 @@ class Users(db.Model, UserMixin):
     is_admin = db.Column(db.Boolean, unique=False, default=False)
     dark_mode = db.Column(db.Boolean, unique=False, default=False)
     posts = db.relationship("Posts", backref="author", lazy=True)
+    liked_posts = db.relationship("Likes", backref="user", lazy=True)
     
     def __repr__(self):
         return f"Users('{self.username}', '{self.email}', '{self.image_file}')"
@@ -27,9 +28,17 @@ class Posts(db.Model):
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    likes = db.relationship("Likes", backref="post", lazy=True)
     
     def __repr__(self):
         return f"Posts('{self.title}', '{self.date_posted}')"
+
+
+class Likes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), nullable=False)
+    like_value = db.Column(db.Boolean, unique=False, default=False) 
 
 
 class Weather(db.Model):
