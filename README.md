@@ -42,7 +42,13 @@ I'm stoked about this project and can't wait to see it all come together. Stay t
 ![](assets/MyWebCharts.png)
 
 ## Current ESP32 device
+- **MCU**: ESP32-WROVER-IE
+- **Temp sensor**: DHT11 or SHT40
+- **Gas sensor**: MQ135
+
 ![](assets/esp32_v1.jpg)
 
 ## Server (Raspberry pi)
+- **OS**: Ubuntu 22.04 LTS
+
 ![](assets/raspberry_pi_w_case.jpg)
