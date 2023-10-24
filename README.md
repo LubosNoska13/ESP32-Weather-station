@@ -30,6 +30,17 @@ It's all about making things easier.
 
 I'm stoked about this project and can't wait to see it all come together. Stay tuned for updates and, if you're as excited as I am, consider giving it a star on GitHub to show your support. Let's make weather data cool and accessible! 💡🌦️
 
+## Website
+### Light Mode
+
+![](assets/MyWebDashboard.jpg)
+![](assets/MyWebPosts.jpg)
+
+### Dark Mode
+
+![](assets/MyWebDashboardNight.png)
+![](assets/MyWebCharts.png)
+
 ## Current ESP32 device
 ![](assets/esp32_v1.jpg)
 
