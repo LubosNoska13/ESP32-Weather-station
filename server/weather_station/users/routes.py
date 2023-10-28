@@ -43,13 +43,21 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for("main.dashboard"))
     
+    # Registration form
     register_form = RegistrationForm()
+    
+    # How many users exists in database
+    number_of_users = Users.query.count()
+    
     if register_form.validate_on_submit():
         ## Hash password
         hashed_password = bcrypt.generate_password_hash(register_form.password.data).decode("utf-8")
         
+        # First created user will be an admin
+        is_admin = True if number_of_users == 0 else False
+        
         ## Create user instance
-        user = Users(username=register_form.username.data, email=register_form.email.data, password=hashed_password)
+        user = Users(username=register_form.username.data, email=register_form.email.data, password=hashed_password, is_admin=is_admin)
         
         ## Add user to database
         db.session.add(user)
