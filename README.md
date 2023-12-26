@@ -25,7 +25,7 @@ Currently, I'm taking on a new challenge. I'm working on designing my very own E
 
 It's all about making things easier.
 
-![](assets/esp32-top.png)
+![](assets/esp32-3d-view.png)
 
 
 I'm stoked about this project and can't wait to see it all come together. Stay tuned for updates and, if you're as excited as I am, consider giving it a star on GitHub to show your support. Let's make weather data cool and accessible! 💡🌦️
