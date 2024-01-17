@@ -31,7 +31,28 @@
 #define pink          0xFC18        ///< 255, 130, 198
 
 #define main_color    cyan
+
 Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
+
+struct RectSize {
+	uint16_t width;
+	uint16_t height;
+};
+
+RectSize measureTextSize(String text) {
+	int16_t x, y;
+	uint16_t w, h;
+
+	// Get the bounding box of the text
+	display.getTextBounds(text, 0, 0, &x, &y, &w, &h);
+
+	// Create a RectSize structure to store the width and height
+	RectSize textSize;
+	textSize.width = w;
+	textSize.height = h;
+
+	return textSize;
+}
 
 void setup() {
 	// Initialize display
