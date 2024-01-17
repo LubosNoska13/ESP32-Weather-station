@@ -62,9 +62,47 @@ void displayText(String text, int color, int size, int x, int y) {
 }
 
 void setup() {
-	// Initialize display
+	// Initialize
 	display.begin();
-	display.fillScreen(ILI9341_BLACK);
+	display.fillScreen(black);
+
+	display.setFont(&small_font);
+	displayText("TUE AUG 10 2021", main_color, 1, (display.width() - measureTextSize("TUE AUG 10 2021").width) / 2, 15);
+
+	display.setFont(&big_font);
+	displayText("10:30", white, 1, (display.width() - measureTextSize("10:30").width) / 2, 50);
+
+	display.setFont(&small_font);
+	displayText("PRIEVIDZA", main_color, 1, 170, 80);
+	displayText("SLOVAKIA", main_color, 1, 170, 130);
+
+	display.setFont(&big_font);
+	displayText("27.5°C", white, 1, 120,115);
+	display.drawBitmap(25, 65, weather_partly_cloudy, 75, 75, main_color);
+
+	// Left-side
+	display.setFont(&small_font);
+	displayText("SAT", main_color, 1, (display.width() / 4) - (measureTextSize("SAT").width / 2), 165);
+	displayText("1/17", white, 1, (display.width() / 4) - (measureTextSize("1/17").width / 2), 175);
+	display.drawBitmap((display.width() / 4) - (45 / 2), 180, weather_lightning, 45, 45, main_color);
+
+	displayText("SUN", main_color, 1, (display.width() / 4) - (measureTextSize("SUN").width / 2), 250);
+	displayText("5:10", white, 1, (display.width() / 4) - (measureTextSize("5:10").width / 2), 262);
+	displayText("20:31", white, 1, (display.width() / 4) - (measureTextSize("20:31").width / 2), 274);
+
+	// Middle-side
+	displayText("SUN", main_color, 1, (display.width() / 2) - (measureTextSize("SUN").width / 2), 165);
+	displayText("1/18", white, 1, (display.width() / 2) - (measureTextSize("1/18").width / 2), 175);
+	display.drawBitmap((display.width() / 2) - (45 / 2), 180, weather_pouring, 45, 45, main_color);
+	display.drawBitmap((display.width() / 2) - (55 / 2), 235, moon_waning_crescent, 55, 55, main_color);
+
+// Right-side
+  displayText("MON", main_color, 1, (display.width() * 3/4) - (measureTextSize("MON").width / 2), 165);
+  displayText("1/19", white, 1, (display.width() * 3/4) - (measureTextSize("1/19").width / 2), 175);
+  display.drawBitmap((display.width() * 3/4) - (45 / 2), 180, weather_windy, 45, 45, main_color);
+  displayText("RAINY", main_color, 1, (display.width() * 3/4) - (measureTextSize("RAINY").width / 2), 250);
+  displayText("Precipitation: 50%", white, 1, (display.width() * 3/4) - (measureTextSize("Precipitation: 50%").width / 2), 262);
+  displayText("Humidity:  94%", white, 1, (display.width() * 3/4) - (measureTextSize("Humidity:  94%").width / 2), 274);
 
 }
 
