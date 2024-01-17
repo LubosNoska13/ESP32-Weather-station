@@ -54,6 +54,13 @@ RectSize measureTextSize(String text) {
 	return textSize;
 }
 
+void displayText(String text, int color, int size, int x, int y) {
+	display.setCursor(x,y);
+	display.setTextColor(color);
+	display.setTextSize(size);
+	display.print(text);
+}
+
 void setup() {
 	// Initialize display
 	display.begin();
