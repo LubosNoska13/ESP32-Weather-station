@@ -4,6 +4,7 @@
 // #include <Arduino.h>
 #include <Adafruit_ILI9341.h>
 #include <Adafruit_GFX.h>
+#include "RTClib.h"
 
 static Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
 
@@ -36,6 +37,6 @@ void displayWeatherIconMax(weather_data_t* current_weather, const char* city);
 
 void displayMoonIcon(const char* moon_phase);
 
-void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city);
+void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city, RTC_DS3231 rtc);
 
 #endif

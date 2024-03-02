@@ -155,12 +155,16 @@ void displayWeatherIconMax(weather_data_t* current_weather, const char* city) {
 	displayText(description, main_color, 1, 170, 130);
 }
 
-void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city) {
+void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city, RTC_DS3231 rtc) {
 	// Time and Date
+	DateTime now = rtc.now();  	
+	char clock[7] = "hh:mm";
+    rtc.now().toString(clock);
+
 	display.setFont(&small_font);
-	displayText("TUE AUG 10 2021", main_color, 1, (display.width() - measureTextSize("TUE AUG 10 2021").width) / 2, 15);
+	displayText("TUE 13 FEB 2024", main_color, 1, (display.width() - measureTextSize("TUE AUG 10 2021").width) / 2, 15);
 	display.setFont(&big_font);
-	displayText("10:30", white, 1, (display.width() - measureTextSize("10:30").width) / 2, 50);
+	displayText(clock, white, 1, (display.width() - measureTextSize(clock).width) / 2, 50);
 
 	// City and Temperature
 	displayWeatherIconMax(current_weather, city);

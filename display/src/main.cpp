@@ -9,22 +9,40 @@
 #include "small_font.h"
 #include "icons.h"
 #include "colors.h"
+#include "RTClib.h"
+#include <Wire.h>
 
 // Create instances
 WifiConnection wifi;
 HTTPClient http;
+RTC_DS3231 rtc;
 
 void setup() {
 	Serial.begin(9600);
 
 	delay(3000);
-
+	
 	//=== Initialize
+	Wire.begin(21, 14);
 	display.begin();
 	display.fillScreen(black);
 
 	wifi.setup();
 	wifi.connect();
+
+	// RTC
+	if (! rtc.begin()) {
+		Serial.println("Couldn't find RTC");
+		Serial.flush();
+		while (1) delay(10);
+	}
+	
+	// if (rtc.lostPower()) {
+	// 	Serial.println("RTC lost power, let's set the time!");
+		// When time needs to be set on a new device, or after a power loss, the
+		// following line sets the RTC to the date & time this sketch was compiled
+	rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+	// }
 
 	// HTTP
 	http.begin(weather_url + "key=" + weather_api_key + "&q=" + lat + ",%20" + lon + "&days=" + forecast_days + "&aqi=no&alerts=no&hour=6&tides=no");
@@ -45,10 +63,15 @@ void setup() {
 		const char* sunrise = obj["forecast"]["forecastday"][0]["astro"]["sunrise"].as<const char*>();
 		const char* moonrise = obj["forecast"]["forecastday"][0]["astro"]["moonrise"].as<const char*>();
 		
+		if (strcmp(moonrise, "No moonrise") == 0) {
+			strcpy(current_weather.moonrise, "");
+		} else {
+			strcpy(current_weather.moonrise, moonrise);
+		}
+
 		current_weather.temp = current_temp;
 		current_weather.type = current_weather_type;
 		strcpy(current_weather.sunrise, sunrise);
-		strcpy(current_weather.moonrise, moonrise);
 
 		weather_data_t weather_data_arr[3];
 		for (uint8_t i = 0; i < forecast_days; i++) {
@@ -69,7 +92,7 @@ void setup() {
 			weather_data_arr[i].chance_of_rain = chance_of_rain;
 			strcpy(weather_data_arr[i].moon_phase, moon_phase);
 		}
-		displayUI(&current_weather, weather_data_arr, city);
+		displayUI(&current_weather, weather_data_arr, city, rtc);
 	}
 }
 
