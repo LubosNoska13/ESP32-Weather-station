@@ -155,14 +155,49 @@ void displayWeatherIconMax(weather_data_t* current_weather, const char* city) {
 	displayText(description, main_color, 1, 170, 130);
 }
 
-void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city, RTC_DS3231 rtc) {
+String dayOfWeekToString(uint8_t dayOfWeek) {
+	switch (dayOfWeek) {
+		case 0: return "SUN";
+		case 1: return "MON";
+		case 2: return "TUE";
+		case 3: return "WED";
+		case 4: return "THU";
+		case 5: return "FRI";
+		case 6: return "SAT";
+		default: return "";
+	}
+}
+
+String monthToString(uint8_t month) {
+	switch (month) {
+		case 1: return "JAN";
+		case 2: return "FEB";
+		case 3: return "MAR";
+		case 4: return "APR";
+		case 5: return "MAY";
+		case 6: return "JUN";
+		case 7: return "JUL";
+		case 8: return "AUG";
+		case 9: return "SEP";
+		case 10: return "OCT";
+		case 11: return "NOV";
+		case 12: return "DEC";
+		default: return "";
+	}
+}
+
+void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city, RTC_DS3231* rtc) {
 	// Time and Date
-	DateTime now = rtc.now();  	
+	DateTime now = rtc->now();  	
 	char clock[7] = "hh:mm";
-    rtc.now().toString(clock);
+    rtc->now().toString(clock);
+
+  	// Format the date into a single String variable
+  	String formattedDate = dayOfWeekToString(now.dayOfTheWeek()) + " " + monthToString(now.month()) + " " +
+                        					 String(now.day(), DEC) + " " + String(now.year(), DEC);
 
 	display.setFont(&small_font);
-	displayText("TUE 13 FEB 2024", main_color, 1, (display.width() - measureTextSize("TUE AUG 10 2021").width) / 2, 15);
+	displayText(formattedDate, main_color, 1, (display.width() - measureTextSize(formattedDate).width) / 2, 15);
 	display.setFont(&big_font);
 	displayText(clock, white, 1, (display.width() - measureTextSize(clock).width) / 2, 50);
 

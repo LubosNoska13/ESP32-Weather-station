@@ -37,6 +37,10 @@ void displayWeatherIconMax(weather_data_t* current_weather, const char* city);
 
 void displayMoonIcon(const char* moon_phase);
 
-void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city, RTC_DS3231 rtc);
+String dayOfWeekToString(uint8_t dayOfWeek);
+
+String monthToString(uint8_t month);
+
+void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city, RTC_DS3231* rtc);
 
 #endif

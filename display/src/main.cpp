@@ -9,13 +9,15 @@
 #include "small_font.h"
 #include "icons.h"
 #include "colors.h"
-#include "RTClib.h"
 #include <Wire.h>
+#include "ntp.h"
+#include "RTClib.h"
 
 // Create instances
 WifiConnection wifi;
 HTTPClient http;
 RTC_DS3231 rtc;
+NTP ntp;
 
 void setup() {
 	Serial.begin(9600);
@@ -23,26 +25,26 @@ void setup() {
 	delay(3000);
 	
 	//=== Initialize
+	// I2C connection
 	Wire.begin(21, 14);
+
+	// Display
 	display.begin();
 	display.fillScreen(black);
 
+	// Wifi
 	wifi.setup();
 	wifi.connect();
 
 	// RTC
 	if (! rtc.begin()) {
-		Serial.println("Couldn't find RTC");
-		Serial.flush();
+		debug("Couldn't find RTC");
 		while (1) delay(10);
 	}
-	
-	// if (rtc.lostPower()) {
-	// 	Serial.println("RTC lost power, let's set the time!");
-		// When time needs to be set on a new device, or after a power loss, the
-		// following line sets the RTC to the date & time this sketch was compiled
-	rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-	// }
+
+	// NTP
+	ntp.setup();
+	ntp.set_date(&rtc);
 
 	// HTTP
 	http.begin(weather_url + "key=" + weather_api_key + "&q=" + lat + ",%20" + lon + "&days=" + forecast_days + "&aqi=no&alerts=no&hour=6&tides=no");
@@ -92,7 +94,7 @@ void setup() {
 			weather_data_arr[i].chance_of_rain = chance_of_rain;
 			strcpy(weather_data_arr[i].moon_phase, moon_phase);
 		}
-		displayUI(&current_weather, weather_data_arr, city, rtc);
+		displayUI(&current_weather, weather_data_arr, city, &rtc);
 	}
 }
 
