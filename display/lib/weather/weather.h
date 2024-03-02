@@ -5,6 +5,7 @@
 #include <Adafruit_ILI9341.h>
 #include <Adafruit_GFX.h>
 #include "RTClib.h"
+#include <HTTPClient.h>
 
 static Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
 
@@ -40,6 +41,8 @@ void displayMoonIcon(const char* moon_phase);
 String dayOfWeekToString(uint8_t dayOfWeek);
 
 String monthToString(uint8_t month);
+
+void get_forecast_data(HTTPClient* http, RTC_DS3231 rtc);
 
 void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city, RTC_DS3231* rtc);
 
