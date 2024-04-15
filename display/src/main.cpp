@@ -18,6 +18,12 @@ HTTPClient http;
 RTC_DS3231 rtc;
 NTP ntp;
 
+int last_minute;
+int last_hour;
+int last_day;
+
+today_t today;
+
 void setup() {
 	Serial.begin(9600);
 
@@ -44,11 +50,26 @@ void setup() {
 	// NTP
 	ntp.setup();
 	ntp.set_date(&rtc);
-
-	// Forecast
-	get_forecast_data(&http, rtc);
 }
 
 void loop() {
+	DateTime now = rtc.now();
 
+	if (last_hour != now.hour()) {
+		last_hour = now.hour();
+		get_forecast_data(&http);
+		update_date(&today);
+
+		if (last_day != now.day()) {
+			last_day = now.day();
+			display_update_time_date(&rtc, true, &today);
+		}
+	}
+
+	if (last_minute != now.minute()){
+		last_minute = now.minute();
+		display_update_time_date(&rtc, false, &today);
+	}	
+
+	vTaskDelay(10000);
 }

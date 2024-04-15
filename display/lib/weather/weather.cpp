@@ -126,7 +126,7 @@ void displayMoonIcon(const char* moon_phase) {
 	}
 }
 
-void displayWeatherIcons(weather_data_t* weather_data_arr) {
+void displayForecastWeather(weather_data_t* weather_data_arr) {
 	const uint8_t FORECAST_MENU_ICONS = 3;
 	const unsigned char* icon;
 	char description[10];
@@ -143,7 +143,7 @@ void displayWeatherIcons(weather_data_t* weather_data_arr) {
 	}
 }
 
-void displayWeatherIconMax(weather_data_t* current_weather, const char* city) {
+void displayCurrentWeather(weather_data_t* current_weather, const char* city) {
 	const unsigned char* icon;
 	char description[10];
 
@@ -187,7 +187,7 @@ String monthToString(uint8_t month) {
 	}
 }
 
-void get_forecast_data(HTTPClient* http, RTC_DS3231 rtc) {
+void get_forecast_data(HTTPClient* http) {
 	http->begin(weather_url + "key=" + weather_api_key + "&q=" + lat + ",%20" + lon + "&days=" + forecast_days + "&aqi=no&alerts=no&hour=6&tides=no");
 	int httpCode = http->GET();
 
@@ -235,36 +235,53 @@ void get_forecast_data(HTTPClient* http, RTC_DS3231 rtc) {
 			weather_data_arr[i].chance_of_rain = chance_of_rain;
 			strcpy(weather_data_arr[i].moon_phase, moon_phase);
 		}
-		displayUI(&current_weather, weather_data_arr, city, &rtc);
+		displayUI(&current_weather, weather_data_arr, city);
 	}
 }
 
-void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city, RTC_DS3231* rtc) {
-	// Time and Date
+void display_update_time_date(RTC_DS3231* rtc, bool update_date, today_t* today) {
 	DateTime now = rtc->now();  	
 	char clock[7] = "hh:mm";
     rtc->now().toString(clock);
 
-  	// Format the date into a single String variable
-  	String formattedDate = dayOfWeekToString(now.dayOfTheWeek()) + " " + monthToString(now.month()) + " " +
-                        					 String(now.day(), DEC) + " " + String(now.year(), DEC);
+	if (update_date == true) {
+		// Format the date into a single String variable
+		String formattedDate = dayOfWeekToString(now.dayOfTheWeek()) + " " + monthToString(now.month()) + " " +
+												String(now.day(), DEC) + " " + String(now.year(), DEC);
+		today->date = formattedDate;
+		display.setFont(&small_font);
+		display.fillRect(0, 0, display.width(), 17, black);
+		displayText(today->date, main_color, 1, (display.width() - measureTextSize(today->date).width) / 2, 15);
+	}
 
-	display.setFont(&small_font);
-	displayText(formattedDate, main_color, 1, (display.width() - measureTextSize(formattedDate).width) / 2, 15);
 	display.setFont(&big_font);
+	display.fillRect(65, 20, 115, 35, black);
 	displayText(clock, white, 1, (display.width() - measureTextSize(clock).width) / 2, 50);
+}
+
+void update_date(today_t* today) {
+	display.setFont(&small_font);
+	displayText(today->date, main_color, 1, (display.width() - measureTextSize(today->date).width) / 2, 15);
+}
+
+void displayUI(weather_data_t* current_weather, weather_data_t* weather_data_arr, const char* city) {
+	// Time and Date
+	// display_update_time_date(rtc, true);
+
+	display.fillRect(0, 0, display.width(), display.height(), black);
 
 	// City and Temperature
-	displayWeatherIconMax(current_weather, city);
-	displayWeatherIcons(weather_data_arr);
+	displayCurrentWeather(current_weather, city);
+	displayForecastWeather(weather_data_arr);
 	displayMoonIcon(weather_data_arr[0].moon_phase);
 	
 	display.setFont(&small_font);
-	// displayText("RAINY", main_color, 1, (display.width() * 3/4) - (measureTextSize("RAINY").width / 2), 250);
-	// displayText("Precipitation: 50%", white, 1, (display.width() * 3/4) - (measureTextSize("Precipitation: 50%").width / 2), 262);
-	// displayText("Humidity:  94%", white, 1, (display.width() * 3/4) - (measureTextSize("Humidity:  94%").width / 2), 274);
 
-	displayText("Today", main_color, 1, (display.width() / 4) - (measureTextSize("Today").width / 2), 270);
-	displayText(current_weather->sunrise, white, 1, (display.width() / 4) - (measureTextSize(current_weather->sunrise).width / 2), 290);
-	displayText(current_weather->moonrise, white, 1, (display.width() / 4) - (measureTextSize(current_weather->moonrise).width / 2), 305);
+	displayText("Today", main_color, 1, (display.width() / 4) - (measureTextSize("Today").width / 2) - 10, 270);
+	displayText(current_weather->sunrise, white, 1, (display.width() / 4) - (measureTextSize(current_weather->sunrise).width / 2) - 10, 290);
+	displayText(current_weather->moonrise, white, 1, (display.width() / 4) - (measureTextSize(current_weather->moonrise).width / 2) - 10, 305);
+
+	displayText("Events", main_color, 1, (display.width() * 3/4) - (measureTextSize("Events").width / 2) + 10, 270);
+	displayText("Maturita", white, 1, (display.width() * 3/4) - (measureTextSize("Maturita").width / 2) + 10, 290);
+	displayText("34 days", white, 1, (display.width() * 3/4) - (measureTextSize("34 days").width / 2) + 10, 305);
 }
