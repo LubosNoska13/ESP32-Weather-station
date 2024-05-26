@@ -58,7 +58,7 @@ Visualize different weather parameters over time with dynamic charts.
 
 I used my ESP32-S2 board with TFT display from Aliexpress and put together this device. It shows current time, date and forecast data. 
 <div align="center">
-    <img src="assets/MyDisplayESP32.jpg" width="70%"/>
+    <img src="assets/MyDisplayESP32.jpg" width="55%"/>
 </div>
 
 ## Server
@@ -67,7 +67,9 @@ I used my ESP32-S2 board with TFT display from Aliexpress and put together this 
 
 Website and MQTT broker runs on Raspberry pi 3b+
 
-![](assets/raspberry_pi_w_case.jpg)
+<div align="center">
+    <img src="assets/raspberry_pi_w_case.jpg" width="65%"/>
+</div>
 
 ---
 <div align="center">
