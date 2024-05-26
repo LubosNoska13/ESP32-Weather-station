@@ -1,4 +1,4 @@
-# ESP32 Weather-station and Website
+d# ESP32 Weather-station and Website
 <p align="center">
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=html,css,javascript,flask,c,ubuntu" />
@@ -57,8 +57,9 @@ Visualize different weather parameters over time with dynamic charts.
 ## My display
 
 I used my ESP32-S2 board with TFT display from Aliexpress and put together this device. It shows current time, date and forecast data. 
-
-![](assets/MyDisplayESP32.jpg)
+<div align="center">
+    <img src="assets/MyDisplayESP32.jpg" width="70%"/>
+</div>
 
 ## Server
 
