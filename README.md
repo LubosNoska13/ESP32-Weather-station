@@ -1,4 +1,4 @@
-d# ESP32 Weather-station and Website
+# ESP32 Weather-station and Website
 <p align="center">
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=html,css,javascript,flask,c,ubuntu" />
